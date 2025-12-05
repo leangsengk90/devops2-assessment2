@@ -4,15 +4,15 @@ init:
 
 plan ENV: 
     terraform workspace select {{ENV}} || terraform workspace new {{ENV}}
-    terraform plan -var-file=../../../variables/global.tfvars -out=../../../plans/infrastructure-{{ENV}}.plan
+    terraform plan -var-file=../../../variables/global.tfvars -out=../../../plans/auth-{{ENV}}.plan
 
 apply ENV: 
     terraform workspace select {{ENV}}
-    terraform apply ../../../plans/infrastructure-{{ENV}}.plan
+    terraform apply ../../../plans/auth-{{ENV}}.plan
 destroy ENV: 
     terraform workspace select {{ENV}}
     terraform destroy -var-file=../../../variables/global.tfvars
 
 clean: 
     rm -rf .terraform && rm -rf .terraform.lock.hcl && \
-    rm -rf ../../../plans/infrastructure-*.plan
+    rm -rf ../../../plans/auth-*.plan

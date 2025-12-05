@@ -17,16 +17,3 @@ destroy ENV:
 clean: 
     rm -rf .terraform && rm -rf .terraform.lock.hcl && \
     rm -rf ../../plans/infrastructure-*.plan
-
-# Cleanup all infrastructure resources step by step
-cleanup ENV:
-    @echo "Step 1: Destroying infrastructure resources..."
-    terraform workspace select {{ENV}}
-    terraform destroy -var-file=../../variables/global.tfvars -auto-approve
-    @echo "\nStep 2: Deleting workspace {{ENV}}..."
-    terraform workspace select default
-    terraform workspace delete {{ENV}}
-    @echo "\nStep 3: Cleaning local files..."
-    rm -rf .terraform .terraform.lock.hcl
-    rm -rf ../../plans/*-{{ENV}}.plan
-    @echo "\n✅ Infrastructure cleanup complete!"
