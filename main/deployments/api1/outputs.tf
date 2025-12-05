@@ -23,15 +23,15 @@ output "ecs_service_name" {
 # API Gateway Outputs
 output "api_endpoint" {
   description = "API Gateway endpoint URL"
-  value       = module.api_gateway.api_endpoint
+  value       = data.terraform_remote_state.infrastructure.outputs.api_gateway_endpoint
 }
 
 output "api_invoke_url" {
-  description = "API Gateway stage invoke URL"
-  value       = module.api_gateway.stage_invoke_url
+  description = "API Gateway invoke URL for api1"
+  value       = "${data.terraform_remote_state.infrastructure.outputs.api_gateway_endpoint}/api1"
 }
 
-output "vpc_link_id" {
-  description = "VPC Link ID"
-  value       = module.api_gateway.vpc_link_id
+output "integration_id" {
+  description = "API Gateway integration ID"
+  value       = module.api_gateway_route.integration_id
 }

@@ -1,13 +1,3 @@
-# CloudWatch Log Group for API Gateway access logs
-module "api_gateway_log_group" {
-  source = "../../../modules/cloudwatch-log-group"
-
-  log_group_name    = "/aws/apigateway/devops2-g4-api1-${terraform.workspace}"
-  retention_in_days = 7
-  environment       = terraform.workspace
-  service_name      = "devops2-g4-api1"
-}
-
 # Application Load Balancer
 module "alb" {
   source = "../../../modules/alb"
@@ -99,35 +89,14 @@ module "ecs_service" {
   scale_down_cooldown      = 300
 }
 
-# API Gateway
-module "api_gateway" {
-  source = "../../../modules/api-gateway"
+# API Gateway Route for api1
+module "api_gateway_route" {
+  source = "../../../modules/api-gateway-route"
 
-  api_name            = "devops2-g4-api1"
-  api_description     = "API Gateway for api1 service"
-  environment         = terraform.workspace
-  service_name        = "devops2-g4-api1"
-  
-  # VPC Link configuration
-  security_group_ids  = [data.terraform_remote_state.infrastructure.outputs.vpc_link_security_group_id]
-  subnet_ids          = data.terraform_remote_state.infrastructure.outputs.private_subnet_ids
-  
-  # ALB integration
-  alb_listener_arn    = module.alb.http_listener_arn
-  
-  # Logging
-  log_group_arn       = module.api_gateway_log_group.log_group_arn
-  
-  # Stage configuration
-  stage_name          = "api1"
-  
-  # Throttling
-  throttle_burst_limit = 5000
-  throttle_rate_limit  = 10000
-  
-  # CORS
-  cors_allow_origins = ["*"]
-  cors_allow_methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-  cors_allow_headers = ["*"]
-  cors_max_age       = 300
+  api_gateway_id   = data.terraform_remote_state.infrastructure.outputs.api_gateway_id
+  vpc_link_id      = data.terraform_remote_state.infrastructure.outputs.vpc_link_id
+  alb_listener_arn = module.alb.http_listener_arn
+  route_prefix     = "/api1"
+  service_name     = "devops2-g4-api1"
+  environment      = terraform.workspace
 }
