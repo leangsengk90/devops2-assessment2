@@ -1,0 +1,19 @@
+
+init: 
+    terraform init
+
+plan ENV: 
+    terraform workspace select {{ENV}} || terraform workspace new {{ENV}}
+    terraform plan -var-file=../../variables/global.tfvars -out=../../plans/remote-state-{{ENV}}.plan
+
+apply ENV: 
+    terraform workspace select {{ENV}}
+    terraform apply ../../plans/remote-state-{{ENV}}.plan
+
+destroy ENV: 
+    terraform workspace select {{ENV}}
+    terraform destroy -var-file=../../variables/global.tfvars
+
+clean: 
+    rm -rf .terraform && rm -rf .terraform.lock.hcl && \
+    rm -rf ../../plans/remote-state-*.plan
