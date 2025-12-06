@@ -1,27 +1,22 @@
-# Application Load Balancer
-module "alb" {
-  source = "../../../modules/alb"
+# Target Group and Listener Rule for shared ALB
+module "alb_target_group" {
+  source = "../../../modules/alb-target-group"
 
-  name                = "devops2-g4-auth-alb"
-  environment         = terraform.workspace
-  service_name        = "devops2-g4-auth"
-  internal            = true
-  security_group_ids  = [data.terraform_remote_state.infrastructure.outputs.alb_security_group_id]
-  subnet_ids          = data.terraform_remote_state.infrastructure.outputs.private_subnet_ids
-  vpc_id              = data.terraform_remote_state.infrastructure.outputs.vpc_id
+  service_name            = "devops2-g4-auth"
+  environment             = terraform.workspace
+  vpc_id                  = data.terraform_remote_state.infrastructure.outputs.vpc_id
+  alb_listener_arn        = data.terraform_remote_state.infrastructure.outputs.shared_alb_listener_arn
+  container_port          = 3000
+  listener_rule_priority  = 200
+  path_patterns           = ["/auth", "/auth/*"]
   
-  target_group_port            = 3000
-  target_group_protocol        = "HTTP"
-  health_check_path            = "/"
-  health_check_protocol        = "HTTP"
-  health_check_matcher         = "200"
-  health_check_interval        = 30
-  health_check_timeout         = 5
+  health_check_path                = "/"
+  health_check_matcher             = "200"
+  health_check_interval            = 30
+  health_check_timeout             = 5
   health_check_healthy_threshold   = 2
   health_check_unhealthy_threshold = 3
-  deregistration_delay         = 30
-  enable_deletion_protection   = false
-  enable_http2                 = true
+  deregistration_delay             = 30
 }
 
 # ECS Cluster
@@ -74,7 +69,7 @@ module "ecs_service" {
   security_group_ids  = [data.terraform_remote_state.infrastructure.outputs.ecs_security_group_id]
   
   # Load balancer
-  target_group_arn    = module.alb.target_group_arn
+  target_group_arn    = module.alb_target_group.target_group_arn
   
   # Service configuration
   desired_count                    = 2
@@ -95,7 +90,7 @@ module "api_gateway_route" {
 
   api_gateway_id   = data.terraform_remote_state.infrastructure.outputs.api_gateway_id
   vpc_link_id      = data.terraform_remote_state.infrastructure.outputs.vpc_link_id
-  alb_listener_arn = module.alb.http_listener_arn
+  alb_listener_arn = data.terraform_remote_state.infrastructure.outputs.shared_alb_listener_arn
   route_prefix     = "/auth"
   service_name     = "devops2-g4-auth"
   environment      = terraform.workspace

@@ -174,3 +174,24 @@ output "ecr_share_repository_name" {
   description = "ECR repository name for share"
   value       = module.ecr_share.repository_name
 }
+
+# Shared ALB Outputs
+output "shared_alb_arn" {
+  description = "Shared ALB ARN"
+  value       = aws_lb.shared.arn
+}
+
+output "shared_alb_dns_name" {
+  description = "Shared ALB DNS name"
+  value       = aws_lb.shared.dns_name
+}
+
+output "shared_alb_listener_arn" {
+  description = "Shared ALB HTTP listener ARN"
+  value       = aws_lb_listener.http.arn
+}
+
+output "shared_alb_zone_id" {
+  description = "Shared ALB zone ID"
+  value       = aws_lb.shared.zone_id
+}

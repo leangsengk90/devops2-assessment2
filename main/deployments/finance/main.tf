@@ -1,27 +1,22 @@
-# Application Load Balancer
-module "alb" {
-  source = "../../../modules/alb"
+# Target Group and Listener Rule for shared ALB
+module "alb_target_group" {
+  source = "../../../modules/alb-target-group"
 
-  name                = "devops2-g4-finance-alb"
-  environment         = terraform.workspace
-  service_name        = "devops2-g4-finance"
-  internal            = true
-  security_group_ids  = [data.terraform_remote_state.infrastructure.outputs.alb_security_group_id]
-  subnet_ids          = data.terraform_remote_state.infrastructure.outputs.private_subnet_ids
-  vpc_id              = data.terraform_remote_state.infrastructure.outputs.vpc_id
+  service_name            = "devops2-g4-finance"
+  environment             = terraform.workspace
+  vpc_id                  = data.terraform_remote_state.infrastructure.outputs.vpc_id
+  alb_listener_arn        = data.terraform_remote_state.infrastructure.outputs.shared_alb_listener_arn
+  container_port          = 8080
+  listener_rule_priority  = 500
+  path_patterns           = ["/finance", "/finance/*"]
   
-  target_group_port            = 8080
-  target_group_protocol        = "HTTP"
-  health_check_path            = "/api/hello"
-  health_check_protocol        = "HTTP"
-  health_check_matcher         = "200"
-  health_check_interval        = 30
-  health_check_timeout         = 5
+  health_check_path                = "/api/hello"
+  health_check_matcher             = "200"
+  health_check_interval            = 30
+  health_check_timeout             = 5
   health_check_healthy_threshold   = 2
   health_check_unhealthy_threshold = 3
-  deregistration_delay         = 30
-  enable_deletion_protection   = false
-  enable_http2                 = true
+  deregistration_delay             = 30
 }
 
 # ECS Cluster
@@ -74,7 +69,7 @@ module "ecs_service" {
   security_group_ids  = [data.terraform_remote_state.infrastructure.outputs.ecs_security_group_id]
   
   # Load balancer
-  target_group_arn    = module.alb.target_group_arn
+  target_group_arn    = module.alb_target_group.target_group_arn
   
   # Service configuration
   desired_count                    = 2

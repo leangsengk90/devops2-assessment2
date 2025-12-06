@@ -1,12 +1,12 @@
 # ALB Outputs
 output "alb_dns_name" {
-  description = "ALB DNS name"
-  value       = module.alb.alb_dns_name
+  description = "Shared ALB DNS name"
+  value       = data.terraform_remote_state.infrastructure.outputs.shared_alb_dns_name
 }
 
 output "target_group_arn" {
   description = "Target group ARN"
-  value       = module.alb.target_group_arn
+  value       = module.alb_target_group.target_group_arn
 }
 
 # ECS Outputs
