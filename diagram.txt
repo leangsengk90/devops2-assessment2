@@ -8,15 +8,19 @@
 │                     AWS API Gateway (Shared - HTTP API)                      │
 │              https://xxxxx.execute-api.us-east-1.amazonaws.com              │
 │                                                                               │
-│  Routes (Path-based routing):                                                │
+│  Routes (Path-based routing + Path Rewriting):                               │
 │  ┌─────────────────────────────────────────────────────────────────────┐    │
-│  │  ANY /api1/{proxy+}      → VPC Link → api1 ALB                      │    │
-│  │  ANY /auth/{proxy+}      → VPC Link → auth ALB                      │    │
-│  │  ANY /profile/{proxy+}   → VPC Link → profile ALB                   │    │
-│  │  ANY /messenger/{proxy+} → VPC Link → messenger ALB                 │    │
-│  │  ANY /finance/{proxy+}   → VPC Link → finance ALB                   │    │
-│  │  ANY /share/{proxy+}     → VPC Link → share ALB                     │    │
+│  │  ANY /api1/{proxy+}      → Strip /api1 → Add Header → VPC Link     │    │
+│  │  ANY /auth/{proxy+}      → Strip /auth → Add Header → VPC Link     │    │
+│  │  ANY /profile/{proxy+}   → Strip /profile → Add Header → VPC Link  │    │
+│  │  ANY /messenger/{proxy+} → Strip /messenger → Add Header → VPC Link│    │
+│  │  ANY /finance/{proxy+}   → Strip /finance → Add Header → VPC Link  │    │
+│  │  ANY /share/{proxy+}     → Strip /share → Add Header → VPC Link    │    │
 │  └─────────────────────────────────────────────────────────────────────┘    │
+│                                                                               │
+│  Path Rewriting:                                                              │
+│    /finance/api/hello  →  /api/hello  (+ X-Service-Name: devops2-g4-finance)│
+│    /auth/             →  /            (+ X-Service-Name: devops2-g4-auth)   │
 │                                                                               │
 │  Stage: $default (auto-deploy)                                               │
 │  CORS: Enabled (allow all origins)                                           │
@@ -38,10 +42,39 @@
     │  │              Private Subnets (Multiple AZs)                 │ │
     │  │                                                              │ │
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
+    │  │  │          SHARED APPLICATION LOAD BALANCER             │  │ │
+    │  │  │  (Consolidated - Replaces 6 individual ALBs)          │  │ │
+    │  │  │  ────────────────────────────────────────────────────  │  │ │
+    │  │  │  HTTP Listener :80                                     │  │ │
+    │  │  │                                                         │  │ │
+    │  │  │  Listener Rules (Header-based routing):                │  │ │
+    │  │  │  ┌─────────────────────────────────────────────────┐  │  │ │
+    │  │  │  │ Priority 100: X-Service-Name = devops2-g4-api1  │  │  │ │
+    │  │  │  │              → Forward to api1 Target Group     │  │  │ │
+    │  │  │  ├─────────────────────────────────────────────────┤  │  │ │
+    │  │  │  │ Priority 200: X-Service-Name = devops2-g4-auth  │  │  │ │
+    │  │  │  │              → Forward to auth Target Group     │  │  │ │
+    │  │  │  ├─────────────────────────────────────────────────┤  │  │ │
+    │  │  │  │ Priority 300: X-Service-Name = devops2-g4-profile│ │  │ │
+    │  │  │  │              → Forward to profile Target Group  │  │  │ │
+    │  │  │  ├─────────────────────────────────────────────────┤  │  │ │
+    │  │  │  │ Priority 400: X-Service-Name = devops2-g4-messenger│ │ │
+    │  │  │  │              → Forward to messenger Target Group│  │  │ │
+    │  │  │  ├─────────────────────────────────────────────────┤  │  │ │
+    │  │  │  │ Priority 500: X-Service-Name = devops2-g4-finance│ │  │ │
+    │  │  │  │              → Forward to finance Target Group  │  │  │ │
+    │  │  │  ├─────────────────────────────────────────────────┤  │  │ │
+    │  │  │  │ Priority 600: X-Service-Name = devops2-g4-share │  │  │ │
+    │  │  │  │              → Forward to share Target Group    │  │  │ │
+    │  │  │  └─────────────────────────────────────────────────┘  │  │ │
+    │  │  │                                                         │  │ │
+    │  │  │  Default Action: Return 404 (Service not found)        │  │ │
+    │  │  │  Security Group: alb-sg (allow from vpc-link)          │  │ │
+    │  │  └──────────────────────────────────────────────────────┘  │ │
+    │  │                                                              │ │
+    │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: API1                                         │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :80                                      │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-api1-cluster-prod            │  │ │
@@ -54,8 +87,6 @@
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: AUTH                                         │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :3000                                    │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-auth-cluster-prod            │  │ │
@@ -67,8 +98,6 @@
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: PROFILE                                      │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :3001                                    │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-profile-cluster-prod         │  │ │
@@ -80,8 +109,6 @@
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: MESSENGER                                    │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :3002                                    │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-messenger-cluster-prod       │  │ │
@@ -93,8 +120,6 @@
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: FINANCE                                      │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :8080                                    │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-finance-cluster-prod         │  │ │
@@ -106,8 +131,6 @@
     │  │  ┌──────────────────────────────────────────────────────┐  │ │
     │  │  │ SERVICE: SHARE                                        │  │ │
     │  │  │ ────────────────────────────────────────────────────  │  │ │
-    │  │  │ ALB (internal) :80                                    │  │ │
-    │  │  │        ↓                                              │  │ │
     │  │  │ Target Group :3004                                    │  │ │
     │  │  │        ↓                                              │  │ │
     │  │  │ ECS Cluster: devops2-g4-share-cluster-prod           │  │ │
@@ -169,18 +192,19 @@ Traffic Flow Example:
 ═══════════════════════════════════════════════════════════════════════════
 
 Client Request:
-  GET https://xxxxx.execute-api.us-east-1.amazonaws.com/finance/transactions
+  GET https://xxxxx.execute-api.us-east-1.amazonaws.com/finance/api/hello
 
        ↓
-   API Gateway
-       ↓ (routes to /finance)
+   API Gateway (receives /finance/api/hello)
+       ↓ (strips /finance prefix → /api/hello)
+       ↓ (adds header: X-Service-Name: devops2-g4-finance)
    VPC Link
        ↓
-   Finance ALB :80
-       ↓
+   Shared ALB (receives /api/hello + header)
+       ↓ (matches header → routes to finance target group)
    Finance Target Group :8080
        ↓
-   Finance ECS Task (Container) :8080
+   Finance ECS Task (Container) :8080 (receives /api/hello)
        ↓
    Response returned through same path
 
@@ -188,12 +212,22 @@ Client Request:
 Key Features:
 ═════════════════════════════════════════════════════════════════════════
 ✓ Single API Gateway with 6 service routes
-✓ Path-based routing (/api1, /auth, /profile, /messenger, /finance, /share)
-✓ Each service isolated with its own ALB, ECS cluster, and containers
+✓ Path-based routing + path rewriting (/api1, /auth, /profile, /messenger, /finance, /share)
+✓ SINGLE SHARED ALB (replaces 6 individual ALBs) - saves $352/month (79% cost reduction)
+✓ Header-based routing at ALB level (X-Service-Name header)
+✓ Each service isolated with its own target group, ECS cluster, and containers
+✓ Services can use different container ports (80, 3000, 3001, 3002, 8080, 3004)
 ✓ Auto-scaling: 2-10 tasks per service based on CPU/Memory
 ✓ Container Insights enabled for monitoring
-✓ Private ALBs (not internet-facing)
+✓ Private ALB (not internet-facing)
 ✓ NAT Gateway for container internet access (pull images, external APIs)
 ✓ ECR image scanning with Amazon Inspector
 ✓ Centralized logging in CloudWatch
 ✓ High availability across multiple availability zones
+
+Cost Optimization:
+═════════════════════════════════════════════════════════════════════════
+• Consolidated 6 ALBs → 1 Shared ALB
+• Before: 6 × $74.83/month = $448.95/month
+• After: 1 × $96.43/month = $96.43/month
+• Savings: $352.52/month (79% reduction in ALB costs)
