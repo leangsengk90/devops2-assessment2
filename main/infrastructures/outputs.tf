@@ -114,3 +114,63 @@ output "ecr_auth_repository_name" {
   description = "ECR repository name for auth"
   value       = module.ecr_auth.repository_name
 }
+
+output "ecr_profile_repository_url" {
+  description = "ECR repository URL for profile"
+  value       = module.ecr_profile.repository_url
+}
+
+output "ecr_profile_repository_arn" {
+  description = "ECR repository ARN for profile"
+  value       = module.ecr_profile.repository_arn
+}
+
+output "ecr_profile_repository_name" {
+  description = "ECR repository name for profile"
+  value       = module.ecr_profile.repository_name
+}
+
+output "ecr_messenger_repository_url" {
+  description = "ECR repository URL for messenger"
+  value       = module.ecr_messenger.repository_url
+}
+
+output "ecr_messenger_repository_arn" {
+  description = "ECR repository ARN for messenger"
+  value       = module.ecr_messenger.repository_arn
+}
+
+output "ecr_messenger_repository_name" {
+  description = "ECR repository name for messenger"
+  value       = module.ecr_messenger.repository_name
+}
+
+output "ecr_finance_repository_url" {
+  description = "ECR repository URL for finance"
+  value       = module.ecr_finance.repository_url
+}
+
+output "ecr_finance_repository_arn" {
+  description = "ECR repository ARN for finance"
+  value       = module.ecr_finance.repository_arn
+}
+
+output "ecr_finance_repository_name" {
+  description = "ECR repository name for finance"
+  value       = module.ecr_finance.repository_name
+}
+
+output "ecr_share_repository_url" {
+  description = "ECR repository URL for share"
+  value       = module.ecr_share.repository_url
+}
+
+output "ecr_share_repository_arn" {
+  description = "ECR repository ARN for share"
+  value       = module.ecr_share.repository_arn
+}
+
+output "ecr_share_repository_name" {
+  description = "ECR repository name for share"
+  value       = module.ecr_share.repository_name
+}

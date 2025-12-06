@@ -62,6 +62,134 @@ module "ecr_auth" {
   force_delete = true
 }
 
+# ECR Repository for profile
+module "ecr_profile" {
+  source = "../../modules/ecr"
+
+  repository_name      = "devops2-g4-profile"
+  environment          = terraform.workspace
+  service_name         = "devops2-g4-profile"
+  image_tag_mutability = "MUTABLE"
+  scan_on_push         = true
+  encryption_type      = "AES256"
+  kms_key_arn          = null
+
+  lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep last 10 images"
+        selection = {
+          tagStatus     = "any"
+          countType     = "imageCountMoreThan"
+          countNumber   = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+  
+  force_delete = true
+}
+
+# ECR Repository for messenger
+module "ecr_messenger" {
+  source = "../../modules/ecr"
+
+  repository_name      = "devops2-g4-messenger"
+  environment          = terraform.workspace
+  service_name         = "devops2-g4-messenger"
+  image_tag_mutability = "MUTABLE"
+  scan_on_push         = true
+  encryption_type      = "AES256"
+  kms_key_arn          = null
+
+  lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep last 10 images"
+        selection = {
+          tagStatus     = "any"
+          countType     = "imageCountMoreThan"
+          countNumber   = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+  
+  force_delete = true
+}
+
+# ECR Repository for finance
+module "ecr_finance" {
+  source = "../../modules/ecr"
+
+  repository_name      = "devops2-g4-finance"
+  environment          = terraform.workspace
+  service_name         = "devops2-g4-finance"
+  image_tag_mutability = "MUTABLE"
+  scan_on_push         = true
+  encryption_type      = "AES256"
+  kms_key_arn          = null
+
+  lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep last 10 images"
+        selection = {
+          tagStatus     = "any"
+          countType     = "imageCountMoreThan"
+          countNumber   = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+  
+  force_delete = true
+}
+
+# ECR Repository for share
+module "ecr_share" {
+  source = "../../modules/ecr"
+
+  repository_name      = "devops2-g4-share"
+  environment          = terraform.workspace
+  service_name         = "devops2-g4-share"
+  image_tag_mutability = "MUTABLE"
+  scan_on_push         = true
+  encryption_type      = "AES256"
+  kms_key_arn          = null
+
+  lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep last 10 images"
+        selection = {
+          tagStatus     = "any"
+          countType     = "imageCountMoreThan"
+          countNumber   = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+  
+  force_delete = true
+}
+
 # Amazon Inspector for ECR scanning
 module "inspector" {
   source = "../../modules/inspector"
