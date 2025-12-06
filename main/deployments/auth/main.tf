@@ -10,7 +10,7 @@ module "alb" {
   subnet_ids          = data.terraform_remote_state.infrastructure.outputs.private_subnet_ids
   vpc_id              = data.terraform_remote_state.infrastructure.outputs.vpc_id
   
-  target_group_port            = 80
+  target_group_port            = 3000
   target_group_protocol        = "HTTP"
   health_check_path            = "/"
   health_check_protocol        = "HTTP"
@@ -50,8 +50,8 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "auth-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-auth-prod:latest"  
-  container_port      = 80
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-auth-prod:1"  
+  container_port      = 3000
   
   # Environment variables for the container
   environment_variables = [
@@ -61,7 +61,7 @@ module "ecs_service" {
     },
     {
       name  = "PORT"
-      value = "80"
+      value = "3000"
     }
   ]
   

@@ -10,9 +10,9 @@ module "alb" {
   subnet_ids          = data.terraform_remote_state.infrastructure.outputs.private_subnet_ids
   vpc_id              = data.terraform_remote_state.infrastructure.outputs.vpc_id
   
-  target_group_port            = 80
+  target_group_port            = 8080
   target_group_protocol        = "HTTP"
-  health_check_path            = "/"
+  health_check_path            = "/api/hello"
   health_check_protocol        = "HTTP"
   health_check_matcher         = "200"
   health_check_interval        = 30
@@ -50,8 +50,8 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "finance-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:latest"  
-  container_port      = 80
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:2"  
+  container_port      = 8080
   
   # Environment variables for the container
   environment_variables = [
@@ -61,7 +61,7 @@ module "ecs_service" {
     },
     {
       name  = "PORT"
-      value = "80"
+      value = "8080"
     }
   ]
   
