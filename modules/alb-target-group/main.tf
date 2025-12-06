@@ -26,7 +26,7 @@ resource "aws_lb_target_group" "this" {
   }
 }
 
-# Listener Rule for path-based routing
+# Listener Rule for header-based routing
 resource "aws_lb_listener_rule" "this" {
   listener_arn = var.alb_listener_arn
   priority     = var.listener_rule_priority
@@ -37,8 +37,9 @@ resource "aws_lb_listener_rule" "this" {
   }
 
   condition {
-    path_pattern {
-      values = var.path_patterns
+    http_header {
+      http_header_name = "X-Service-Name"
+      values           = [var.service_name]
     }
   }
 

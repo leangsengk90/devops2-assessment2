@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "finance-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:2"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:5"  
   container_port      = 8080
   
   # Environment variables for the container
@@ -90,7 +90,7 @@ module "api_gateway_route" {
 
   api_gateway_id   = data.terraform_remote_state.infrastructure.outputs.api_gateway_id
   vpc_link_id      = data.terraform_remote_state.infrastructure.outputs.vpc_link_id
-  alb_listener_arn = module.alb.http_listener_arn
+  alb_listener_arn = data.terraform_remote_state.infrastructure.outputs.shared_alb_listener_arn
   route_prefix     = "/finance"
   service_name     = "devops2-g4-finance"
   environment      = terraform.workspace

@@ -90,7 +90,7 @@ module "api_gateway_route" {
 
   api_gateway_id   = data.terraform_remote_state.infrastructure.outputs.api_gateway_id
   vpc_link_id      = data.terraform_remote_state.infrastructure.outputs.vpc_link_id
-  alb_listener_arn = module.alb.http_listener_arn
+  alb_listener_arn = data.terraform_remote_state.infrastructure.outputs.shared_alb_listener_arn
   route_prefix     = "/share"
   service_name     = "devops2-g4-share"
   environment      = terraform.workspace

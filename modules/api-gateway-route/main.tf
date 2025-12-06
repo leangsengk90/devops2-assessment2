@@ -7,9 +7,11 @@ resource "aws_apigatewayv2_integration" "this" {
   connection_type    = "VPC_LINK"
   connection_id      = var.vpc_link_id
 
-  # Rewrite path to strip the route prefix
+  # Strip the service prefix and add custom header for ALB routing
+  # /finance/api/hello -> /api/hello (with X-Service-Name: finance header)
   request_parameters = {
-    "overwrite:path" = "/$request.path.proxy"
+    "overwrite:path"                = "/$request.path.proxy"
+    "append:header.X-Service-Name"  = var.service_name
   }
 }
 
@@ -29,9 +31,10 @@ resource "aws_apigatewayv2_integration" "root" {
   connection_type    = "VPC_LINK"
   connection_id      = var.vpc_link_id
 
-  # Rewrite /api1 to /
+  # Root path: /finance -> / (with X-Service-Name header)
   request_parameters = {
-    "overwrite:path" = "/"
+    "overwrite:path"                = "/"
+    "append:header.X-Service-Name"  = var.service_name
   }
 }
 
