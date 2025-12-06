@@ -50,7 +50,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "profile-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-profile-prod:latest"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-profile-prod:1"  
   container_port      = 3001
   
   # Environment variables for the container
