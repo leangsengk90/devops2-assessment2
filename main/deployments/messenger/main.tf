@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "messenger-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-messenger-prod:1"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-messenger-prod:6"  
   container_port      = 3002
   
   # Environment variables for the container
