@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "finance-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:5"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-finance-prod:6"  
   container_port      = 8080
   
   # Environment variables for the container
