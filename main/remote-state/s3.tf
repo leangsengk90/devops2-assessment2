@@ -3,7 +3,7 @@
 module "s3_bucket_remote_state" {
   source = "../../modules/s3"
 
-  bucket_name = "devops2-g4-remote-state-${terraform.workspace}"
+  bucket_name = "devops2-g4-remote-state"
   force_destroy = true
 
   enable_public_access_block = true

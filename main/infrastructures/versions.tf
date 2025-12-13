@@ -7,4 +7,13 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  # Optional: Configure remote state backend
+  backend "s3" {
+    bucket         = "devops2-g4-remote-state"
+    key            = "infrastructures/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "remote-state-locking"
+  }
 }
+

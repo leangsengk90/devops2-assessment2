@@ -213,7 +213,7 @@ Key Features:
 ═════════════════════════════════════════════════════════════════════════
 ✓ Single API Gateway with 6 service routes
 ✓ Path-based routing + path rewriting (/api1, /auth, /profile, /messenger, /finance, /share)
-✓ SINGLE SHARED ALB (replaces 6 individual ALBs) - saves $352/month (79% cost reduction)
+✓ SINGLE SHARED ALB (replaces 6 individual ALBs) for cost efficiency
 ✓ Header-based routing at ALB level (X-Service-Name header)
 ✓ Each service isolated with its own target group, ECS cluster, and containers
 ✓ Services can use different container ports (80, 3000, 3001, 3002, 8080, 3004)
@@ -224,10 +224,3 @@ Key Features:
 ✓ ECR image scanning with Amazon Inspector
 ✓ Centralized logging in CloudWatch
 ✓ High availability across multiple availability zones
-
-Cost Optimization:
-═════════════════════════════════════════════════════════════════════════
-• Consolidated 6 ALBs → 1 Shared ALB
-• Before: 6 × $74.83/month = $448.95/month
-• After: 1 × $96.43/month = $96.43/month
-• Savings: $352.52/month (79% reduction in ALB costs)
