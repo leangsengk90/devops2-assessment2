@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "api1-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-api1-prod:latest"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-api1-${terraform.workspace}:latest"  
   container_port      = 80
   
   # Environment variables for the container

@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "share-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-share-prod:8"  
+  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-share-${terraform.workspace}:8"  
   container_port      = 3004
   
   # Environment variables for the container
