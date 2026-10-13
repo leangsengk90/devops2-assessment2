@@ -1,6 +1,6 @@
 output "inspector_enabler_id" {
   description = "ID of the Inspector enabler"
-  value       = aws_inspector2_enabler.this.id
+  value       = var.enable_inspector ? aws_inspector2_enabler.this[0].id : null
 }
 
 output "sns_topic_arn" {

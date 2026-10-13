@@ -8,8 +8,8 @@ data "terraform_remote_state" "infrastructure" {
   # Optional: Configure remote state backend
   backend = "s3"
   config = {
-    bucket = "devops2-g4-remote-state"
+    bucket = "devops2-g4-remote-state-029637202701"
     key    = "env:/${terraform.workspace}/infrastructures/terraform.tfstate"
-    region = "us-east-1"
+    region = "ap-southeast-2"
   }
 }

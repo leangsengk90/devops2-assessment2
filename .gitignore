@@ -22,3 +22,18 @@ plans/
 
 # Ignore lock files (optional - some teams commit this)
 .terraform.lock.hcl
+# Added by code-review-graph
+.code-review-graph/
+
+# macOS
+.DS_Store
+
+# Local AI tooling (code-review-graph / Claude Code)
+.claude/
+.mcp.json
+CLAUDE.md
+
+# Rebuild-timing run artifacts (state copies, raw logs, pid)
+reports/**/state/
+reports/**/logs/
+reports/**/run.pid

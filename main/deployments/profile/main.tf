@@ -45,7 +45,7 @@ module "ecs_service" {
   
   # Container configuration
   container_name      = "profile-app"
-  container_image     = "481604401489.dkr.ecr.us-east-1.amazonaws.com/devops2-g4-profile-${terraform.workspace}:11"  
+  container_image     = "029637202701.dkr.ecr.ap-southeast-2.amazonaws.com/devops2-g4-profile-${terraform.workspace}:15"  
   container_port      = 3001
   
   # Environment variables for the container

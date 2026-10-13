@@ -1,0 +1,171 @@
+name: Rebuild prod
+
+# On every push to main: destroy deployments -> infrastructures -> remote-state,
+# then recreate remote-state -> infrastructures -> deployments.
+# ECR repositories and their images are never destroyed.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: rebuild-prod
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ap-southeast-2
+  TF_WORKSPACE_NAME: prod
+  TF_IN_AUTOMATION: "true"
+  STATE_BUCKET: devops2-g4-remote-state-029637202701
+  SERVICES: auth messenger profile finance share
+  ECR_SERVICES: api1 auth messenger profile finance share
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.13.3
+          terraform_wrapper: false
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Prepare
+        run: |
+          echo "VARS=$GITHUB_WORKSPACE/variables/global.tfvars" >> "$GITHUB_ENV"
+          echo "INFRA_STATE=$RUNNER_TEMP/infrastructures.tfstate" >> "$GITHUB_ENV"
+          echo "| Phase | Seconds |" > "$RUNNER_TEMP/timings.md"
+          echo "|---|---|" >> "$RUNNER_TEMP/timings.md"
+          if aws s3api head-bucket --bucket "$STATE_BUCKET" 2>/dev/null; then
+            echo "ENV_EXISTS=true" >> "$GITHUB_ENV"
+          else
+            echo "ENV_EXISTS=false" >> "$GITHUB_ENV"
+            echo "State bucket not found: skipping destroy phases."
+          fi
+
+      # ---------------- destroy ----------------
+      - name: Destroy deployments
+        if: env.ENV_EXISTS == 'true'
+        run: |
+          start=$SECONDS
+          for s in $SERVICES; do
+            d=main/deployments/$s
+            terraform -chdir=$d init -input=false
+            terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+            terraform -chdir=$d destroy -auto-approve -input=false -var-file="$VARS"
+          done
+          echo "| Destroy deployments | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Destroy infrastructures (keep ECR)
+        if: env.ENV_EXISTS == 'true'
+        run: |
+          start=$SECONDS
+          d=main/infrastructures
+          terraform -chdir=$d init -input=false
+          terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+          mapfile -t targets < <(terraform -chdir=$d state list | grep -vE '^module\.ecr_|(^|\.)data\.' || true)
+          if [ ${#targets[@]} -gt 0 ]; then
+            terraform -chdir=$d destroy -auto-approve -input=false -var-file="$VARS" "${targets[@]/#/-target=}"
+          fi
+          # The state bucket is about to be deleted: keep the state that still tracks the ECR repos.
+          terraform -chdir=$d state pull > "$INFRA_STATE"
+          echo "| Destroy infrastructures | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Destroy remote-state
+        if: env.ENV_EXISTS == 'true'
+        run: |
+          start=$SECONDS
+          d=main/remote-state
+          terraform -chdir=$d init -input=false
+          terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+          terraform -chdir=$d destroy -auto-approve -input=false -var-file="$VARS"
+          echo "| Destroy remote-state | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      # ---------------- create ----------------
+      - name: Create remote-state
+        run: |
+          start=$SECONDS
+          d=main/remote-state
+          terraform -chdir=$d init -input=false
+          terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+          # A just-deleted bucket name can take a moment to become reusable.
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if terraform -chdir=$d apply -auto-approve -input=false -var-file="$VARS"; then break; fi
+            [ $attempt = 10 ] && exit 1
+            echo "Retrying in 20s (attempt $attempt failed)"; sleep 20
+          done
+          echo "| Create remote-state | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Create infrastructures
+        run: |
+          start=$SECONDS
+          d=main/infrastructures
+          terraform -chdir=$d init -input=false -reconfigure
+          terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+          if [ -s "$INFRA_STATE" ]; then
+            terraform -chdir=$d state push "$INFRA_STATE"
+          else
+            # No carried-over state: adopt the ECR repositories that already exist.
+            for s in $ECR_SERVICES; do
+              repo=devops2-g4-$s-$TF_WORKSPACE_NAME
+              if aws ecr describe-repositories --repository-names "$repo" >/dev/null 2>&1; then
+                terraform -chdir=$d import -input=false -var-file="$VARS" "module.ecr_$s.aws_ecr_repository.this" "$repo"
+                terraform -chdir=$d import -input=false -var-file="$VARS" "module.ecr_$s.aws_ecr_lifecycle_policy.this[0]" "$repo" || true
+              fi
+            done
+          fi
+          terraform -chdir=$d apply -auto-approve -input=false -var-file="$VARS"
+          echo "API_ENDPOINT=$(terraform -chdir=$d output -raw api_gateway_endpoint)" >> "$GITHUB_ENV"
+          echo "| Create infrastructures | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Create deployments
+        run: |
+          start=$SECONDS
+          for s in $SERVICES; do
+            d=main/deployments/$s
+            terraform -chdir=$d init -input=false -reconfigure
+            terraform -chdir=$d workspace select -or-create "$TF_WORKSPACE_NAME"
+            terraform -chdir=$d apply -auto-approve -input=false -var-file="$VARS"
+          done
+          echo "| Create deployments | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Wait until services are healthy
+        run: |
+          start=$SECONDS
+          for s in $SERVICES; do
+            aws ecs wait services-stable \
+              --cluster "devops2-g4-$s-cluster-$TF_WORKSPACE_NAME" \
+              --services "devops2-g4-$s-service-$TF_WORKSPACE_NAME"
+          done
+          echo "| Wait until healthy | $((SECONDS - start)) |" >> "$RUNNER_TEMP/timings.md"
+
+      - name: Smoke test and summary
+        if: always()
+        run: |
+          {
+            echo "## Rebuild prod"
+            echo
+            cat "$RUNNER_TEMP/timings.md"
+            echo
+            if [ -n "${API_ENDPOINT:-}" ]; then
+              echo "API endpoint: $API_ENDPOINT"
+              echo
+              echo "| Service | URL | HTTP |"
+              echo "|---|---|---|"
+              for s in $SERVICES; do
+                code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$API_ENDPOINT/$s" || true)
+                echo "| $s | $API_ENDPOINT/$s | $code |"
+              done
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

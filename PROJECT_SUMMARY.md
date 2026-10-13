@@ -38,7 +38,7 @@ These modules promote reusability and consistency across deployments.
 
 Sets up the Terraform backend infrastructure:
 
-- Creates an S3 bucket (`devops2-g4-remote-state`) for storing Terraform state files.
+- Creates an S3 bucket (`devops2-g4-remote-state-029637202701`) for storing Terraform state files.
 - Creates a DynamoDB table (`remote-state-locking`) for state locking to prevent concurrent modifications.
 - Includes `Justfile` for easy execution of Terraform commands.
 

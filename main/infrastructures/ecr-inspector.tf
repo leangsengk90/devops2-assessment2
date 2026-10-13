@@ -197,6 +197,7 @@ module "inspector" {
   account_id       = data.aws_caller_identity.current.account_id
   environment      = terraform.workspace
   service_name     = "devops2-g4-app"
+  enable_inspector = false # Inspector is blocked by an SCP on the AWS Free plan account
   resource_types   = ["ECR"]
   create_sns_topic = true
   notification_email = null  # Set your email if you want notifications

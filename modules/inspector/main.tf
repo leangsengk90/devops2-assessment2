@@ -1,4 +1,5 @@
 resource "aws_inspector2_enabler" "this" {
+  count          = var.enable_inspector ? 1 : 0
   account_ids    = [var.account_id]
   resource_types = var.resource_types
 

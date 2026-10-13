@@ -10,9 +10,9 @@ terraform {
 
   # Optional: Configure remote state backend
   backend "s3" {
-    bucket         = "devops2-g4-remote-state"
+    bucket         = "devops2-g4-remote-state-029637202701"
     key            = "deployments/share/terraform.tfstate"
-    region         = "us-east-1"
+    region         = "ap-southeast-2"
     dynamodb_table = "remote-state-locking"
   }
 }

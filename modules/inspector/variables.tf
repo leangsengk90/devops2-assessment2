@@ -13,6 +13,12 @@ variable "service_name" {
   type        = string
 }
 
+variable "enable_inspector" {
+  description = "Enable Amazon Inspector scanning (disable where blocked, e.g. AWS Free plan accounts)"
+  type        = bool
+  default     = true
+}
+
 variable "resource_types" {
   description = "Resource types to scan (Valid values: EC2, ECR, LAMBDA, LAMBDA_CODE)"
   type        = list(string)

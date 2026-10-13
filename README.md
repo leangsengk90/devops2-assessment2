@@ -21,7 +21,7 @@ just plan prod
 just apply prod
 ```
 
-This creates the S3 bucket `devops2-g4-remote-state` and DynamoDB table `remote-state-locking`.
+This creates the S3 bucket `devops2-g4-remote-state-029637202701` and DynamoDB table `remote-state-locking`.
 
 ### 2. Run Infrastructure
 
