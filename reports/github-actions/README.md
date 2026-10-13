@@ -20,3 +20,17 @@ Pushing a change to `rebuild.sh` runs a full rebuild (destroy and recreate remot
 | Create deployments | 3m 03s | 3m 03s | 3m 03s | – |
 | Wait until healthy | 1m 09s | 1m 09s | 1m 09s | – |
 | Total | 32m 41s | 32m 41s | 32m 41s | – |
+
+## Redeploy runs
+
+| Run | Date | Commit | Result | Redeploy | Healthy | Total |
+|---|---|---|---|---|---|---|
+| [#2](runs/run-0002.md) | 2026-10-14 01:51 | `6a28fa3` | success | 2m 00s | 3m 00s | 5m 00s |
+
+### Redeploy statistics over 1 successful run(s)
+
+| Phase | Mean | Min | Max | SD |
+|---|---|---|---|---|
+| Redeploy deployments | 2m 00s | 2m 00s | 2m 00s | – |
+| Wait until healthy | 3m 00s | 3m 00s | 3m 00s | – |
+| Total | 5m 00s | 5m 00s | 5m 00s | – |
