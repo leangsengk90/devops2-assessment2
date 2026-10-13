@@ -2,7 +2,7 @@
 # Redeploy the microservices only (remote-state and infrastructures are left as they are).
 # For each service: apply Terraform if its code changed (e.g. a new image tag),
 # otherwise force ECS to start fresh tasks, then wait until every service is healthy.
-#
+# 0
 # Pushing a change to this file on main runs it in GitHub Actions (Rebuild prod workflow).
 # Change note (edit to trigger a redeploy): initial
 set -euo pipefail
