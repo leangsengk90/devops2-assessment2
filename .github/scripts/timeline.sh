@@ -1,20 +1,26 @@
-# Phase timing helpers for the rebuild-prod workflow.
-# Usage inside a step:  source .github/scripts/timeline.sh; phase_begin "Create infrastructures"
-# The phase end (and its ok/failed status) is recorded automatically when the step's shell exits.
+# Phase timing helpers for rebuild.sh / redeploy.sh.
+# Usage:  source .github/scripts/timeline.sh
+#         phase_begin "Create infrastructures"; ...; phase_end
+# If the script exits while a phase is open, that phase is recorded as failed.
 
-TIMELINE="$RUNNER_TEMP/timeline.csv"
+TIMELINE="${TIMELINE:-${RUNNER_TEMP:-${TMPDIR:-/tmp}}/timeline.csv}"
+PHASE_NAME=""
+
+_now() { date +%Y-%m-%dT%H:%M:%S%z; }
 
 phase_begin() {
   PHASE_NAME="$1"
+  PHASE_START=$(_now)
   PHASE_T0=$(date +%s)
-  echo "⏱ [$(date '+%H:%M:%S')] $PHASE_NAME started"
-  trap 'phase_end $?' EXIT
+  echo "⏱ [$(date +%H:%M:%S)] $PHASE_NAME started"
 }
 
 phase_end() {
-  local rc=$1 t1 status=ok
+  local status=${1:-ok} t1
   t1=$(date +%s)
-  [ "$rc" = 0 ] || status=failed
-  echo "$PHASE_NAME,$(date -d "@$PHASE_T0" -Iseconds),$(date -d "@$t1" -Iseconds),$((t1 - PHASE_T0)),$status" >> "$TIMELINE"
-  echo "⏱ [$(date '+%H:%M:%S')] $PHASE_NAME finished in $((t1 - PHASE_T0))s ($status)"
+  echo "$PHASE_NAME,$PHASE_START,$(_now),$((t1 - PHASE_T0)),$status" >> "$TIMELINE"
+  echo "⏱ [$(date +%H:%M:%S)] $PHASE_NAME finished in $((t1 - PHASE_T0))s ($status)"
+  PHASE_NAME=""
 }
+
+trap '[ -n "$PHASE_NAME" ] && phase_end failed' EXIT
