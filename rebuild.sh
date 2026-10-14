@@ -2,7 +2,7 @@
 # Full rebuild of prod: destroy deployments -> infrastructures -> remote-state,
 # then recreate remote-state -> infrastructures -> deployments and wait until healthy.
 # ECR repositories and their images are never destroyed.
-# 8
+# 9
 # Pushing a change to this file on main runs it in GitHub Actions (Rebuild prod workflow).
 # Change note (edit to trigger a rebuild): initial
 set -euo pipefail
