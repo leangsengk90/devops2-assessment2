@@ -1,4 +1,4 @@
-# DevOps2 Assessment 2: 01
+# DevOps2 Assessment 2
 
 This project sets up a complete AWS infrastructure using Terraform, including remote state management, base infrastructure, and service deployments.
 
