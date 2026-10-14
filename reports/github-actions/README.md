@@ -11,19 +11,20 @@ Pushing a change to `rebuild.sh` runs a full rebuild (destroy and recreate remot
 | [#5](runs/run-0005.md) | 2026-10-14 11:01 | `1d07bb8` | success | 16m 59s | 1m 20s | 24s | 1m 09s | 2m 52s | 2m 32s | 1m 24s | 26m 40s |
 | [#6](runs/run-0006.md) | 2026-10-14 13:56 | `e8a679b` | success | 18m 14s | 1m 21s | 22s | 1m 14s | 3m 04s | 2m 31s | 1m 55s | 28m 41s |
 | [#7](runs/run-0007.md) | 2026-10-14 16:20 | `151efd3` | success | 17m 21s | 1m 32s | 19s | 1m 10s | 2m 57s | 2m 37s | 1m 08s | 27m 04s |
+| [#8](runs/run-0008.md) | 2026-10-14 17:40 | `15ed68c` | success | 18m 45s | 1m 25s | 21s | 1m 09s | 3m 06s | 2m 45s | 53s | 28m 24s |
 
-### Rebuild statistics over 5 successful run(s)
+### Rebuild statistics over 6 successful run(s)
 
 | Phase | Mean | Min | Max | SD |
 |---|---|---|---|---|
-| Destroy deployments | 18m 24s | 16m 59s | 21m 35s | 111s |
-| Destroy infrastructures | 1m 30s | 1m 20s | 1m 50s | 12s |
-| Destroy remote-state | 23s | 19s | 24s | 2s |
-| Create remote-state | 1m 13s | 1m 09s | 1m 22s | 6s |
-| Create infrastructures | 3m 01s | 2m 52s | 3m 18s | 10s |
-| Create deployments | 2m 41s | 2m 31s | 3m 03s | 13s |
-| Wait until healthy | 1m 24s | 1m 08s | 1m 55s | 19s |
-| Total | 28m 36s | 26m 40s | 32m 41s | 145s |
+| Destroy deployments | 18m 27s | 16m 59s | 21m 35s | 99s |
+| Destroy infrastructures | 1m 29s | 1m 20s | 1m 50s | 11s |
+| Destroy remote-state | 22s | 19s | 24s | 2s |
+| Create remote-state | 1m 12s | 1m 09s | 1m 22s | 5s |
+| Create infrastructures | 3m 02s | 2m 52s | 3m 18s | 9s |
+| Create deployments | 2m 42s | 2m 31s | 3m 03s | 12s |
+| Wait until healthy | 1m 19s | 53s | 1m 55s | 21s |
+| Total | 28m 34s | 26m 40s | 32m 41s | 130s |
 
 ## Redeploy runs
 
