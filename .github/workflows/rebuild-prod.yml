@@ -3,7 +3,8 @@ name: Rebuild prod
 # Push a change to rebuild.sh  -> full rebuild: destroy and recreate remote-state, infrastructures
 #                                 and deployments (ECR repositories and images are kept).
 # Push a change to redeploy.sh -> redeploy the microservices only.
-# If both change in one push, the full rebuild runs.
+# Push a change to destroy.sh  -> destroy everything, including the ECR repositories and images.
+# If several change in one push: destroy wins over rebuild, rebuild wins over redeploy.
 # After each run the timeline report is printed to the log and committed to reports/github-actions/.
 on:
   push:
@@ -11,12 +12,13 @@ on:
     paths:
       - rebuild.sh
       - redeploy.sh
+      - destroy.sh
   workflow_dispatch:
     inputs:
       mode:
         description: What to run
         type: choice
-        options: [redeploy, rebuild]
+        options: [redeploy, rebuild, destroy]
         default: redeploy
 
 concurrency:
@@ -54,7 +56,9 @@ jobs:
             if [ -z "$BEFORE" ] || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then BEFORE=HEAD~1; fi
             changed=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
             echo "Changed files:"; echo "$changed"
-            if grep -qx 'rebuild.sh' <<<"$changed"; then mode=rebuild; else mode=redeploy; fi
+            if grep -qx 'destroy.sh' <<<"$changed"; then mode=destroy
+            elif grep -qx 'rebuild.sh' <<<"$changed"; then mode=rebuild
+            else mode=redeploy; fi
           fi
           echo "RUN_MODE=$mode" >> "$GITHUB_ENV"
           echo "Mode: $mode"

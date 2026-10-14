@@ -24,6 +24,11 @@ MODE_PHASES = {
         "Redeploy deployments",
         "Wait until healthy",
     ],
+    "destroy": [
+        "Destroy deployments",
+        "Destroy infrastructures",
+        "Destroy remote-state",
+    ],
 }
 SHORT = {
     "Destroy deployments": "Destroy deploy",
@@ -164,7 +169,8 @@ md = [
     "",
     "Pushing a change to `rebuild.sh` runs a full rebuild (destroy and recreate remote-state → infrastructures → "
     "deployments; ECR repositories and images are kept). Pushing a change to `redeploy.sh` only redeploys the "
-    "microservices. This file is regenerated after every run; per-run details are in [`runs/`](runs/), raw data in "
+    "microservices. Pushing a change to `destroy.sh` destroys everything, including the ECR repositories "
+    "and images. This file is regenerated after every run; per-run details are in [`runs/`](runs/), raw data in "
     "`timings.csv` and `service-health.csv`.",
 ]
 for m, m_phases in MODE_PHASES.items():
