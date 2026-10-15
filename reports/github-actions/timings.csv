@@ -130,3 +130,11 @@ run_number,run_id,mode,commit,event,phase,start,end,seconds,status
 18,38674645192,rebuild,789c7b2,workflow_dispatch,Create deployments,2026-10-15T10:33:08+0700,2026-10-15T10:36:11+0700,183,ok
 18,38674645192,rebuild,789c7b2,workflow_dispatch,Wait until healthy,2026-10-15T10:36:11+0700,2026-10-15T10:37:36+0700,85,ok
 18,38674645192,rebuild,789c7b2,workflow_dispatch,Total,2026-10-15T10:07:58+0700,2026-10-15T10:37:36+0700,1778,success
+19,38677257624,rebuild,fe10649,workflow_dispatch,Destroy deployments,2026-10-15T10:38:05+0700,2026-10-15T10:56:37+0700,1112,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Destroy infrastructures,2026-10-15T10:56:37+0700,2026-10-15T10:58:04+0700,87,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Destroy remote-state,2026-10-15T10:58:04+0700,2026-10-15T10:58:25+0700,21,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Create remote-state,2026-10-15T10:58:25+0700,2026-10-15T10:59:47+0700,82,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Create infrastructures,2026-10-15T10:59:47+0700,2026-10-15T11:02:56+0700,189,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Create deployments,2026-10-15T11:02:56+0700,2026-10-15T11:05:48+0700,172,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Wait until healthy,2026-10-15T11:05:48+0700,2026-10-15T11:07:13+0700,85,ok
+19,38677257624,rebuild,fe10649,workflow_dispatch,Total,2026-10-15T10:38:05+0700,2026-10-15T11:07:13+0700,1748,success
