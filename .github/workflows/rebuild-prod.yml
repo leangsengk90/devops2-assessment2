@@ -6,6 +6,7 @@ name: Rebuild prod
 # Push a change to destroy.sh  -> destroy everything, including the ECR repositories and images.
 # If several change in one push: destroy wins over rebuild, rebuild wins over redeploy.
 # After each run the timeline report is printed to the log and committed to reports/github-actions/.
+# Run workflow with repeat N > 1 -> runs the chosen mode N times back to back (not for destroy).
 on:
   push:
     branches: [main]
@@ -20,6 +21,10 @@ on:
         type: choice
         options: [redeploy, rebuild, destroy]
         default: redeploy
+      repeat:
+        description: How many runs in a row (each run starts the next; the chain stops at the first failure or cancel)
+        type: number
+        default: 1
 
 concurrency:
   group: rebuild-prod
@@ -27,6 +32,7 @@ concurrency:
 
 permissions:
   contents: write # commit the timeline report back to the repo
+  actions: write  # start the next run when repeat > 1
 
 env:
   AWS_REGION: ap-southeast-2
@@ -110,3 +116,13 @@ jobs:
             echo "Push failed (attempt $attempt), retrying"; sleep 5
           done
           exit 1
+
+      - name: Start next run (repeat ${{ inputs.repeat }})
+        if: success() && github.event_name == 'workflow_dispatch' && inputs.repeat > 1 && env.RUN_MODE != 'destroy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LEFT: ${{ inputs.repeat }}
+        run: |
+          gh workflow run rebuild-prod.yml --repo "$GITHUB_REPOSITORY" --ref main \
+            -f mode="$RUN_MODE" -f repeat=$((LEFT - 1))
+          echo "Started the next $RUN_MODE run; $((LEFT - 1)) to go including it"
