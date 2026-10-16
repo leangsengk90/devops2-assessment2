@@ -1,0 +1,78 @@
+2025-12-05|4693922|leangsengk90|initial commit
+2025-12-05|fc7209e|leangsengk90|Change to single api gateway
+2025-12-06|bbd7f67|leangsengk90|Enhance API Gateway Routes and Integrations
+2025-12-06|4101d51|leangsengk90|Remove unnecessary .DS_Store files from the repository
+2025-12-06|43b0335|leangsengk90|feat(deployments): add AWS infrastructure for finance, messenger, profile, and share services
+2025-12-06|15ee7b0|leangsengk90|Good
+2025-12-06|6694a53|leangsengk90|Remove auth service
+2025-12-06|7690d5d|leangsengk90|Add Diagram and Cost Calculation
+2025-12-06|2ef2803|leangsengk90|Cleanup for multi ALB
+2025-12-06|43c9e2d|leangsengk90|Stage 2: Change to Single ALB
+2025-12-06|c547700|leangsengk90|Done - Single ALB but not rewrite
+2025-12-06|6de481f|leangsengk90|Done - Single ALB + Multi Target Group for Multi Services
+2025-12-06|41764c1|leangsengk90|Change Diagram
+2025-12-06|af47991|leangsengk90|Done with Docs
+2025-12-06|afaf0e5|leangsengk90|Cleanup
+2025-12-13|08665ff|leangsengk90|Done: Refactor
+2025-12-13|f80a97c|leangsengk90|Change for preprod
+2025-12-13|c8dff8a|leangsengk90|Change
+2025-12-13|51cad9c|leangsengk90|Change
+2025-12-13|1e753ae|leangsengk90|Add resource URLs for GitHub repositories related to the project
+2026-10-14|26edcb8|leangsengk90|Move prod to ap-southeast-2 and add rebuild-prod workflow [skip ci]
+2026-10-14|95e368e|leangsengk90|Update README.md
+2026-10-14|a28b9f5|leangsengk90|Add per-run timeline report to rebuild-prod workflow [skip ci]
+2026-10-14|edef198|leangsengk90|Split pipeline into rebuild.sh and redeploy.sh triggers [skip ci]
+2026-10-14|3393e31|leangsengk90|Prod rebuild report: run #1 (success) [skip ci]
+2026-10-14|6a28fa3|leangsengk90|Update redeploy.sh
+2026-10-14|676c143|github-actions[bot]|Prod redeploy report: run #2 (success) [skip ci]
+2026-10-14|453b778|leangsengk90|Update rebuild.sh
+2026-10-14|7770d10|leangsengk90|Fix report push: commit remote-state state and autostash before rebase
+2026-10-14|f74e698|leangsengk90|Add destroy.sh: destroy all of prod including ECR images [skip ci]
+2026-10-14|dfbfafe|leangsengk90|Update rebuild.sh
+2026-10-14|a48eb7b|github-actions[bot]|Prod rebuild report: run #4 (success) [skip ci]
+2026-10-14|1d07bb8|leangsengk90|Update rebuild.sh
+2026-10-14|e53fc0d|github-actions[bot]|Prod rebuild report: run #5 (success) [skip ci]
+2026-10-14|e8a679b|leangsengk90|Modify change note in rebuild.sh
+2026-10-14|57369b4|github-actions[bot]|Prod rebuild report: run #6 (success) [skip ci]
+2026-10-14|151efd3|leangsengk90|Update comment line number in rebuild.sh
+2026-10-14|07a1c65|github-actions[bot]|Prod rebuild report: run #7 (success) [skip ci]
+2026-10-14|15ed68c|leangsengk90|Update rebuild.sh
+2026-10-14|96aecea|github-actions[bot]|Prod rebuild report: run #8 (success) [skip ci]
+2026-10-14|4e5477f|leangsengk90|Update comment line number in rebuild.sh
+2026-10-14|c469570|github-actions[bot]|Prod rebuild report: run #9 (success) [skip ci]
+2026-10-14|8368863|leangsengk90|Update rebuild.sh
+2026-10-14|657c221|github-actions[bot]|Prod rebuild report: run #10 (success) [skip ci]
+2026-10-14|fb6da05|leangsengk90|Update rebuild.sh
+2026-10-14|87a86a2|leangsengk90|Update README.md
+2026-10-14|5f07c0b|leangsengk90|Delete DevOps2-Group4/Deploy Microservices.pdf
+2026-10-14|2a0bf60|leangsengk90|Delete DevOps2-Group4/project_timeline_01.png
+2026-10-14|385588f|leangsengk90|Delete DevOps2-Group4/project_timeline_02.png
+2026-10-14|e81bbb1|leangsengk90|Delete reports/rebuild-timings directory
+2026-10-14|a51e94d|github-actions[bot]|Prod rebuild report: run #11 (success) [skip ci]
+2026-10-14|e48343f|leangsengk90|Update rebuild.sh
+2026-10-15|ff73a64|github-actions[bot]|Prod rebuild report: run #12 (success) [skip ci]
+2026-10-15|d659e9c|leangsengk90|Update rebuild.sh
+2026-10-15|2793982|github-actions[bot]|Prod rebuild report: run #13 (success) [skip ci]
+2026-10-15|cf5dd79|leangsengk90|Update rebuild.sh
+2026-10-15|d81093b|github-actions[bot]|Prod rebuild report: run #14 (success) [skip ci]
+2026-10-15|d73ec12|leangsengk90|Update rebuild.sh
+2026-10-15|723bc75|github-actions[bot]|Prod rebuild report: run #15 (success) [skip ci]
+2026-10-15|fc86389|leangsengk90|Update rebuild.sh
+2026-10-15|5c9bd54|github-actions[bot]|Prod rebuild report: run #16 (success) [skip ci]
+2026-10-15|fa72284|leangsengk90|Add repeat input to Rebuild prod workflow to chain runs
+2026-10-15|789c7b2|github-actions[bot]|Prod rebuild report: run #17 (success) [skip ci]
+2026-10-15|fe10649|github-actions[bot]|Prod rebuild report: run #18 (success) [skip ci]
+2026-10-15|16ef1f5|github-actions[bot]|Prod rebuild report: run #19 (success) [skip ci]
+2026-10-15|8cc94e7|github-actions[bot]|Prod rebuild report: run #20 (success) [skip ci]
+2026-10-15|7939475|github-actions[bot]|Prod rebuild report: run #21 (success) [skip ci]
+2026-10-15|cbeb8b0|github-actions[bot]|Prod rebuild report: run #22 (success) [skip ci]
+2026-10-15|bec2c30|github-actions[bot]|Prod rebuild report: run #23 (success) [skip ci]
+2026-10-15|cad5f30|github-actions[bot]|Prod rebuild report: run #24 (success) [skip ci]
+2026-10-15|451698e|github-actions[bot]|Prod rebuild report: run #25 (success) [skip ci]
+2026-10-15|d2baed9|github-actions[bot]|Prod rebuild report: run #26 (success) [skip ci]
+2026-10-15|ccec9a6|github-actions[bot]|Prod rebuild report: run #27 (success) [skip ci]
+2026-10-15|976d908|github-actions[bot]|Prod rebuild report: run #28 (success) [skip ci]
+2026-10-15|d223ff5|github-actions[bot]|Prod rebuild report: run #29 (success) [skip ci]
+2026-10-15|ff6af97|github-actions[bot]|Prod rebuild report: run #30 (success) [skip ci]
+2026-10-15|99b96df|github-actions[bot]|Prod rebuild report: run #31 (success) [skip ci]
+2026-10-15|7baaa2f|github-actions[bot]|Prod rebuild report: run #32 (success) [skip ci]

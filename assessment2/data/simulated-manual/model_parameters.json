@@ -1,0 +1,13 @@
+{
+ "seed": 20261015,
+ "resources": 140,
+ "console_median_s": 35.0,
+ "console_sigma": 0.45,
+ "rework_prob": 0.02,
+ "wait_mean_s": 480.0,
+ "wait_sd_s": 60.0,
+ "learning_first": 1.15,
+ "learning_rate": 0.25,
+ "attr_error_prob": 0.005,
+ "runs": 10
+}

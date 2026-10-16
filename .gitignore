@@ -37,3 +37,5 @@ CLAUDE.md
 reports/**/state/
 reports/**/logs/
 reports/**/run.pid
+
+__pycache__/

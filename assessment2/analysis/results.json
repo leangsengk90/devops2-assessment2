@@ -1,0 +1,1492 @@
+{
+ "gh_phases": {
+  "Destroy deployments": {
+   "n": 30,
+   "mean": 1094.1667,
+   "sd": 54.2333,
+   "median": 1088.5,
+   "min": 1019.0,
+   "max": 1295.0,
+   "ci_low": 1073.9156,
+   "ci_high": 1114.4177,
+   "cv_pct": 4.9566,
+   "skew": 1.7647,
+   "kurtosis": 5.4207,
+   "shapiro_W": 0.8692,
+   "shapiro_p": 0.0016
+  },
+  "Destroy infrastructures": {
+   "n": 30,
+   "mean": 90.5,
+   "sd": 9.2354,
+   "median": 92.0,
+   "min": 72.0,
+   "max": 110.0,
+   "ci_low": 87.0514,
+   "ci_high": 93.9486,
+   "cv_pct": 10.2049,
+   "skew": -0.0362,
+   "kurtosis": -0.4742,
+   "shapiro_W": 0.9798,
+   "shapiro_p": 0.8194
+  },
+  "Destroy remote-state": {
+   "n": 30,
+   "mean": 22.4667,
+   "sd": 1.8333,
+   "median": 23.0,
+   "min": 18.0,
+   "max": 25.0,
+   "ci_low": 21.7821,
+   "ci_high": 23.1512,
+   "cv_pct": 8.16,
+   "skew": -0.8605,
+   "kurtosis": -0.1262,
+   "shapiro_W": 0.8697,
+   "shapiro_p": 0.0016
+  },
+  "Create remote-state": {
+   "n": 30,
+   "mean": 71.4,
+   "sd": 3.5777,
+   "median": 70.0,
+   "min": 68.0,
+   "max": 82.0,
+   "ci_low": 70.0641,
+   "ci_high": 72.7359,
+   "cv_pct": 5.0108,
+   "skew": 1.9045,
+   "kurtosis": 3.5874,
+   "shapiro_W": 0.7681,
+   "shapiro_p": 0.0
+  },
+  "Create infrastructures": {
+   "n": 30,
+   "mean": 183.5333,
+   "sd": 7.1232,
+   "median": 183.5,
+   "min": 172.0,
+   "max": 204.0,
+   "ci_low": 180.8735,
+   "ci_high": 186.1932,
+   "cv_pct": 3.8812,
+   "skew": 0.8927,
+   "kurtosis": 1.2005,
+   "shapiro_W": 0.9407,
+   "shapiro_p": 0.0948
+  },
+  "Create deployments": {
+   "n": 30,
+   "mean": 164.3667,
+   "sd": 10.7719,
+   "median": 162.0,
+   "min": 151.0,
+   "max": 183.0,
+   "ci_low": 160.3444,
+   "ci_high": 168.389,
+   "cv_pct": 6.5536,
+   "skew": 0.5953,
+   "kurtosis": -0.9042,
+   "shapiro_W": 0.8868,
+   "shapiro_p": 0.004
+  },
+  "Wait until healthy": {
+   "n": 30,
+   "mean": 80.5,
+   "sd": 12.0309,
+   "median": 84.0,
+   "min": 53.0,
+   "max": 115.0,
+   "ci_low": 76.0076,
+   "ci_high": 84.9924,
+   "cv_pct": 14.9452,
+   "skew": 0.4135,
+   "kurtosis": 1.6053,
+   "shapiro_W": 0.8666,
+   "shapiro_p": 0.0014
+  },
+  "Full create": {
+   "n": 30,
+   "mean": 499.8,
+   "sd": 21.0408,
+   "median": 496.5,
+   "min": 471.0,
+   "max": 541.0,
+   "ci_low": 491.9432,
+   "ci_high": 507.6568,
+   "cv_pct": 4.2099,
+   "skew": 0.27,
+   "kurtosis": -1.0929,
+   "shapiro_W": 0.9426,
+   "shapiro_p": 0.1069
+  },
+  "Full destroy": {
+   "n": 30,
+   "mean": 1207.1333,
+   "sd": 57.6821,
+   "median": 1198.5,
+   "min": 1123.0,
+   "max": 1429.0,
+   "ci_low": 1185.5945,
+   "ci_high": 1228.6722,
+   "cv_pct": 4.7784,
+   "skew": 2.0057,
+   "kurtosis": 6.6691,
+   "shapiro_W": 0.8456,
+   "shapiro_p": 0.0005
+  },
+  "Total cycle": {
+   "n": 30,
+   "mean": 1706.9667,
+   "sd": 69.4935,
+   "median": 1703.0,
+   "min": 1600.0,
+   "max": 1961.0,
+   "ci_low": 1681.0174,
+   "ci_high": 1732.916,
+   "cv_pct": 4.0712,
+   "skew": 1.591,
+   "kurtosis": 4.946,
+   "shapiro_W": 0.8815,
+   "shapiro_p": 0.0031
+  }
+ },
+ "gh_cycles": [
+  {
+   "run_number": 1,
+   "Destroy deployments": 1295,
+   "Destroy infrastructures": 110,
+   "Destroy remote-state": 24,
+   "Create remote-state": 82,
+   "Create infrastructures": 198,
+   "Create deployments": 183,
+   "Wait until healthy": 69,
+   "Full create": 532,
+   "Full destroy": 1429,
+   "Total cycle": 1961
+  },
+  {
+   "run_number": 4,
+   "Destroy deployments": 1069,
+   "Destroy infrastructures": 86,
+   "Destroy remote-state": 24,
+   "Create remote-state": 69,
+   "Create infrastructures": 176,
+   "Create deployments": 163,
+   "Wait until healthy": 84,
+   "Full create": 492,
+   "Full destroy": 1179,
+   "Total cycle": 1672
+  },
+  {
+   "run_number": 5,
+   "Destroy deployments": 1019,
+   "Destroy infrastructures": 80,
+   "Destroy remote-state": 24,
+   "Create remote-state": 69,
+   "Create infrastructures": 172,
+   "Create deployments": 152,
+   "Wait until healthy": 84,
+   "Full create": 477,
+   "Full destroy": 1123,
+   "Total cycle": 1600
+  },
+  {
+   "run_number": 6,
+   "Destroy deployments": 1094,
+   "Destroy infrastructures": 81,
+   "Destroy remote-state": 22,
+   "Create remote-state": 74,
+   "Create infrastructures": 184,
+   "Create deployments": 151,
+   "Wait until healthy": 115,
+   "Full create": 524,
+   "Full destroy": 1197,
+   "Total cycle": 1721
+  },
+  {
+   "run_number": 7,
+   "Destroy deployments": 1041,
+   "Destroy infrastructures": 92,
+   "Destroy remote-state": 19,
+   "Create remote-state": 70,
+   "Create infrastructures": 177,
+   "Create deployments": 157,
+   "Wait until healthy": 68,
+   "Full create": 472,
+   "Full destroy": 1152,
+   "Total cycle": 1624
+  },
+  {
+   "run_number": 8,
+   "Destroy deployments": 1125,
+   "Destroy infrastructures": 85,
+   "Destroy remote-state": 21,
+   "Create remote-state": 69,
+   "Create infrastructures": 186,
+   "Create deployments": 165,
+   "Wait until healthy": 53,
+   "Full create": 473,
+   "Full destroy": 1231,
+   "Total cycle": 1704
+  },
+  {
+   "run_number": 9,
+   "Destroy deployments": 1058,
+   "Destroy infrastructures": 92,
+   "Destroy remote-state": 21,
+   "Create remote-state": 73,
+   "Create infrastructures": 175,
+   "Create deployments": 154,
+   "Wait until healthy": 84,
+   "Full create": 486,
+   "Full destroy": 1171,
+   "Total cycle": 1657
+  },
+  {
+   "run_number": 10,
+   "Destroy deployments": 1093,
+   "Destroy infrastructures": 81,
+   "Destroy remote-state": 18,
+   "Create remote-state": 69,
+   "Create infrastructures": 183,
+   "Create deployments": 152,
+   "Wait until healthy": 68,
+   "Full create": 472,
+   "Full destroy": 1192,
+   "Total cycle": 1664
+  },
+  {
+   "run_number": 11,
+   "Destroy deployments": 1089,
+   "Destroy infrastructures": 95,
+   "Destroy remote-state": 24,
+   "Create remote-state": 70,
+   "Create infrastructures": 177,
+   "Create deployments": 163,
+   "Wait until healthy": 84,
+   "Full create": 494,
+   "Full destroy": 1208,
+   "Total cycle": 1702
+  },
+  {
+   "run_number": 12,
+   "Destroy deployments": 1086,
+   "Destroy infrastructures": 82,
+   "Destroy remote-state": 22,
+   "Create remote-state": 68,
+   "Create infrastructures": 184,
+   "Create deployments": 154,
+   "Wait until healthy": 83,
+   "Full create": 489,
+   "Full destroy": 1190,
+   "Total cycle": 1679
+  },
+  {
+   "run_number": 13,
+   "Destroy deployments": 1118,
+   "Destroy infrastructures": 100,
+   "Destroy remote-state": 24,
+   "Create remote-state": 72,
+   "Create infrastructures": 184,
+   "Create deployments": 181,
+   "Wait until healthy": 86,
+   "Full create": 523,
+   "Full destroy": 1242,
+   "Total cycle": 1765
+  },
+  {
+   "run_number": 14,
+   "Destroy deployments": 1040,
+   "Destroy infrastructures": 105,
+   "Destroy remote-state": 24,
+   "Create remote-state": 69,
+   "Create infrastructures": 177,
+   "Create deployments": 160,
+   "Wait until healthy": 68,
+   "Full create": 474,
+   "Full destroy": 1169,
+   "Total cycle": 1643
+  },
+  {
+   "run_number": 15,
+   "Destroy deployments": 1074,
+   "Destroy infrastructures": 91,
+   "Destroy remote-state": 23,
+   "Create remote-state": 69,
+   "Create infrastructures": 182,
+   "Create deployments": 152,
+   "Wait until healthy": 68,
+   "Full create": 471,
+   "Full destroy": 1188,
+   "Total cycle": 1659
+  },
+  {
+   "run_number": 16,
+   "Destroy deployments": 1178,
+   "Destroy infrastructures": 95,
+   "Destroy remote-state": 24,
+   "Create remote-state": 70,
+   "Create infrastructures": 186,
+   "Create deployments": 160,
+   "Wait until healthy": 68,
+   "Full create": 484,
+   "Full destroy": 1297,
+   "Total cycle": 1781
+  },
+  {
+   "run_number": 17,
+   "Destroy deployments": 1155,
+   "Destroy infrastructures": 85,
+   "Destroy remote-state": 19,
+   "Create remote-state": 70,
+   "Create infrastructures": 176,
+   "Create deployments": 165,
+   "Wait until healthy": 99,
+   "Full create": 510,
+   "Full destroy": 1259,
+   "Total cycle": 1769
+  },
+  {
+   "run_number": 18,
+   "Destroy deployments": 1132,
+   "Destroy infrastructures": 91,
+   "Destroy remote-state": 24,
+   "Create remote-state": 72,
+   "Create infrastructures": 191,
+   "Create deployments": 183,
+   "Wait until healthy": 85,
+   "Full create": 531,
+   "Full destroy": 1247,
+   "Total cycle": 1778
+  },
+  {
+   "run_number": 19,
+   "Destroy deployments": 1112,
+   "Destroy infrastructures": 87,
+   "Destroy remote-state": 21,
+   "Create remote-state": 82,
+   "Create infrastructures": 189,
+   "Create deployments": 172,
+   "Wait until healthy": 85,
+   "Full create": 528,
+   "Full destroy": 1220,
+   "Total cycle": 1748
+  },
+  {
+   "run_number": 20,
+   "Destroy deployments": 1131,
+   "Destroy infrastructures": 94,
+   "Destroy remote-state": 24,
+   "Create remote-state": 75,
+   "Create infrastructures": 186,
+   "Create deployments": 161,
+   "Wait until healthy": 84,
+   "Full create": 506,
+   "Full destroy": 1249,
+   "Total cycle": 1755
+  },
+  {
+   "run_number": 21,
+   "Destroy deployments": 1051,
+   "Destroy infrastructures": 99,
+   "Destroy remote-state": 24,
+   "Create remote-state": 71,
+   "Create infrastructures": 204,
+   "Create deployments": 181,
+   "Wait until healthy": 85,
+   "Full create": 541,
+   "Full destroy": 1174,
+   "Total cycle": 1715
+  },
+  {
+   "run_number": 22,
+   "Destroy deployments": 1050,
+   "Destroy infrastructures": 94,
+   "Destroy remote-state": 24,
+   "Create remote-state": 70,
+   "Create infrastructures": 178,
+   "Create deployments": 159,
+   "Wait until healthy": 69,
+   "Full create": 476,
+   "Full destroy": 1168,
+   "Total cycle": 1644
+  },
+  {
+   "run_number": 23,
+   "Destroy deployments": 1040,
+   "Destroy infrastructures": 81,
+   "Destroy remote-state": 22,
+   "Create remote-state": 68,
+   "Create infrastructures": 183,
+   "Create deployments": 151,
+   "Wait until healthy": 83,
+   "Full create": 485,
+   "Full destroy": 1143,
+   "Total cycle": 1628
+  },
+  {
+   "run_number": 24,
+   "Destroy deployments": 1124,
+   "Destroy infrastructures": 78,
+   "Destroy remote-state": 24,
+   "Create remote-state": 71,
+   "Create infrastructures": 192,
+   "Create deployments": 178,
+   "Wait until healthy": 85,
+   "Full create": 526,
+   "Full destroy": 1226,
+   "Total cycle": 1752
+  },
+  {
+   "run_number": 25,
+   "Destroy deployments": 1028,
+   "Destroy infrastructures": 94,
+   "Destroy remote-state": 23,
+   "Create remote-state": 70,
+   "Create infrastructures": 187,
+   "Create deployments": 161,
+   "Wait until healthy": 84,
+   "Full create": 502,
+   "Full destroy": 1145,
+   "Total cycle": 1647
+  },
+  {
+   "run_number": 26,
+   "Destroy deployments": 1053,
+   "Destroy infrastructures": 95,
+   "Destroy remote-state": 21,
+   "Create remote-state": 70,
+   "Create infrastructures": 179,
+   "Create deployments": 168,
+   "Wait until healthy": 100,
+   "Full create": 517,
+   "Full destroy": 1169,
+   "Total cycle": 1686
+  },
+  {
+   "run_number": 27,
+   "Destroy deployments": 1088,
+   "Destroy infrastructures": 93,
+   "Destroy remote-state": 23,
+   "Create remote-state": 76,
+   "Create infrastructures": 185,
+   "Create deployments": 164,
+   "Wait until healthy": 83,
+   "Full create": 508,
+   "Full destroy": 1204,
+   "Total cycle": 1712
+  },
+  {
+   "run_number": 28,
+   "Destroy deployments": 1105,
+   "Destroy infrastructures": 75,
+   "Destroy remote-state": 20,
+   "Create remote-state": 75,
+   "Create infrastructures": 175,
+   "Create deployments": 161,
+   "Wait until healthy": 84,
+   "Full create": 495,
+   "Full destroy": 1200,
+   "Total cycle": 1695
+  },
+  {
+   "run_number": 29,
+   "Destroy deployments": 1079,
+   "Destroy infrastructures": 99,
+   "Destroy remote-state": 25,
+   "Create remote-state": 71,
+   "Create infrastructures": 183,
+   "Create deployments": 183,
+   "Wait until healthy": 70,
+   "Full create": 507,
+   "Full destroy": 1203,
+   "Total cycle": 1710
+  },
+  {
+   "run_number": 30,
+   "Destroy deployments": 1102,
+   "Destroy infrastructures": 104,
+   "Destroy remote-state": 22,
+   "Create remote-state": 69,
+   "Create infrastructures": 181,
+   "Create deployments": 164,
+   "Wait until healthy": 84,
+   "Full create": 498,
+   "Full destroy": 1228,
+   "Total cycle": 1726
+  },
+  {
+   "run_number": 31,
+   "Destroy deployments": 1126,
+   "Destroy infrastructures": 99,
+   "Destroy remote-state": 23,
+   "Create remote-state": 71,
+   "Create infrastructures": 192,
+   "Create deployments": 179,
+   "Wait until healthy": 69,
+   "Full create": 511,
+   "Full destroy": 1248,
+   "Total cycle": 1759
+  },
+  {
+   "run_number": 32,
+   "Destroy deployments": 1070,
+   "Destroy infrastructures": 72,
+   "Destroy remote-state": 21,
+   "Create remote-state": 68,
+   "Create infrastructures": 184,
+   "Create deployments": 154,
+   "Wait until healthy": 84,
+   "Full create": 490,
+   "Full destroy": 1163,
+   "Total cycle": 1653
+  }
+ ],
+ "destroy_deploy_share_pct": 64.0862,
+ "destroy_deploy_per_service_s": 218.8333,
+ "health": {
+  "n": 149,
+  "mean": 89.4564,
+  "sd": 12.148,
+  "median": 89.0,
+  "min": 64.0,
+  "max": 159.0,
+  "ci_low": 87.4897,
+  "ci_high": 91.423,
+  "cv_pct": 13.5798,
+  "skew": 1.5802,
+  "kurtosis": 6.4719,
+  "shapiro_W": 0.9092,
+  "shapiro_p": 0.0
+ },
+ "health_missing": [
+  {
+   "run": 14,
+   "service": "finance",
+   "http_code": 200
+  }
+ ],
+ "health_by_service": {
+  "auth": {
+   "n": 30,
+   "mean": 93.8333,
+   "sd": 15.9289,
+   "median": 90.5,
+   "min": 76.0,
+   "max": 159.0,
+   "ci_low": 87.8854,
+   "ci_high": 99.7813,
+   "cv_pct": 16.9757,
+   "skew": 2.5447,
+   "kurtosis": 9.1121,
+   "shapiro_W": 0.7646,
+   "shapiro_p": 0.0
+  },
+  "messenger": {
+   "n": 30,
+   "mean": 87.2667,
+   "sd": 9.1461,
+   "median": 87.5,
+   "min": 71.0,
+   "max": 106.0,
+   "ci_low": 83.8515,
+   "ci_high": 90.6819,
+   "cv_pct": 10.4806,
+   "skew": 0.1515,
+   "kurtosis": -0.8439,
+   "shapiro_W": 0.9754,
+   "shapiro_p": 0.6944
+  },
+  "profile": {
+   "n": 30,
+   "mean": 89.0,
+   "sd": 8.0215,
+   "median": 90.0,
+   "min": 76.0,
+   "max": 103.0,
+   "ci_low": 86.0047,
+   "ci_high": 91.9953,
+   "cv_pct": 9.0129,
+   "skew": 0.0898,
+   "kurtosis": -1.0635,
+   "shapiro_W": 0.9572,
+   "shapiro_p": 0.2624
+  },
+  "finance": {
+   "n": 29,
+   "mean": 93.4483,
+   "sd": 13.7752,
+   "median": 94.0,
+   "min": 67.0,
+   "max": 125.0,
+   "ci_low": 88.2085,
+   "ci_high": 98.6881,
+   "cv_pct": 14.741,
+   "skew": 0.1994,
+   "kurtosis": -0.3823,
+   "shapiro_W": 0.982,
+   "shapiro_p": 0.8862
+  },
+  "share": {
+   "n": 30,
+   "mean": 83.8667,
+   "sd": 9.7441,
+   "median": 81.0,
+   "min": 64.0,
+   "max": 112.0,
+   "ci_low": 80.2282,
+   "ci_high": 87.5052,
+   "cv_pct": 11.6185,
+   "skew": 0.9145,
+   "kurtosis": 1.492,
+   "shapiro_W": 0.9334,
+   "shapiro_p": 0.0605
+  }
+ },
+ "http": {
+  "200": 155
+ },
+ "redeploy": [
+  {
+   "phase": "Redeploy deployments",
+   "seconds": 120
+  },
+  {
+   "phase": "Wait until healthy",
+   "seconds": 180
+  },
+  {
+   "phase": "Total",
+   "seconds": 300
+  }
+ ],
+ "redeploy_health": {
+  "n": 5,
+  "mean": 82.4,
+  "sd": 6.3482,
+  "median": 81.0,
+  "min": 76.0,
+  "max": 90.0,
+  "ci_low": 74.5176,
+  "ci_high": 90.2824,
+  "cv_pct": 7.7042,
+  "skew": 0.3131,
+  "kurtosis": -2.7266,
+  "shapiro_W": 0.8873,
+  "shapiro_p": 0.3439
+ },
+ "n_tf": 30,
+ "n_starts": 150,
+ "n_http": 155,
+ "http_200": 155,
+ "tf_rebuild_success": {
+  "k": 30,
+  "n": 30,
+  "p": 1.0,
+  "low": 0.8865,
+  "high": 1.0
+ },
+ "tf_services_ok": {
+  "k": 150,
+  "n": 150,
+  "p": 1.0,
+  "low": 0.975,
+  "high": 1.0
+ },
+ "health_max_at": {
+  "run": 12,
+  "service": "auth"
+ },
+ "health_second_max": 125.0,
+ "destroy_deploy_max_run": 1,
+ "full_create_max_run": 21,
+ "campaign": {
+  "first": "14 Oct 2026 01:13",
+  "last_start": "15 Oct 2026 16:53",
+  "per_day": {
+   "14 Oct": 10,
+   "15 Oct": 20
+  },
+  "push": 14,
+  "dispatch": 16,
+  "push_runs": "1\u201316",
+  "dispatch_runs": "17\u201332"
+ },
+ "trigger": {
+  "Full create": {
+   "push": {
+    "n": 14,
+    "mean": 490.2143,
+    "sd": 21.1303,
+    "median": 485.0,
+    "min": 471.0,
+    "max": 532.0,
+    "ci_low": 478.014,
+    "ci_high": 502.4145,
+    "cv_pct": 4.3104,
+    "skew": 1.1002,
+    "kurtosis": -0.1252,
+    "shapiro_W": 0.8145,
+    "shapiro_p": 0.0076
+   },
+   "dispatch": {
+    "n": 16,
+    "mean": 508.1875,
+    "sd": 17.5546,
+    "median": 507.5,
+    "min": 476.0,
+    "max": 541.0,
+    "ci_low": 498.8333,
+    "ci_high": 517.5417,
+    "cv_pct": 3.4543,
+    "skew": 0.0832,
+    "kurtosis": -0.3459,
+    "shapiro_W": 0.9856,
+    "shapiro_p": 0.9929
+   },
+   "test": {
+    "diff_mean": -17.9732,
+    "ratio": 1.0367,
+    "welch_t": -2.513,
+    "welch_df": 25.411,
+    "welch_p": 0.0187,
+    "mw_U": 51.0,
+    "mw_p": 0.0119,
+    "hedges_g": -0.9062,
+    "g_ci_low": -1.6593,
+    "g_ci_high": -0.1532
+   }
+  },
+  "Full destroy": {
+   "push": {
+    "n": 14,
+    "mean": 1212.0,
+    "sd": 75.1491,
+    "median": 1191.0,
+    "min": 1123.0,
+    "max": 1429.0,
+    "ci_low": 1168.6102,
+    "ci_high": 1255.3898,
+    "cv_pct": 6.2004,
+    "skew": 2.0565,
+    "kurtosis": 5.1933,
+    "shapiro_W": 0.7967,
+    "shapiro_p": 0.0045
+   },
+   "dispatch": {
+    "n": 16,
+    "mean": 1202.875,
+    "sd": 38.6883,
+    "median": 1203.5,
+    "min": 1143.0,
+    "max": 1259.0,
+    "ci_low": 1182.2595,
+    "ci_high": 1223.4905,
+    "cv_pct": 3.2163,
+    "skew": -0.1202,
+    "kurtosis": -1.3407,
+    "shapiro_W": 0.9312,
+    "shapiro_p": 0.2543
+   },
+   "test": {
+    "diff_mean": 9.125,
+    "ratio": 0.9925,
+    "welch_t": 0.4093,
+    "welch_df": 18.8502,
+    "welch_p": 0.6869,
+    "mw_U": 106.5,
+    "mw_p": 0.8353,
+    "hedges_g": 0.1517,
+    "g_ci_low": -0.5666,
+    "g_ci_high": 0.87
+   }
+  },
+  "Total cycle": {
+   "push": {
+    "n": 14,
+    "mean": 1702.2857,
+    "sd": 89.6021,
+    "median": 1675.5,
+    "min": 1600.0,
+    "max": 1961.0,
+    "ci_low": 1650.551,
+    "ci_high": 1754.0204,
+    "cv_pct": 5.2636,
+    "skew": 1.9996,
+    "kurtosis": 5.0908,
+    "shapiro_W": 0.8151,
+    "shapiro_p": 0.0077
+   },
+   "dispatch": {
+    "n": 16,
+    "mean": 1711.0625,
+    "sd": 48.3769,
+    "median": 1713.5,
+    "min": 1628.0,
+    "max": 1778.0,
+    "ci_low": 1685.2842,
+    "ci_high": 1736.8408,
+    "cv_pct": 2.8273,
+    "skew": -0.3644,
+    "kurtosis": -1.1335,
+    "shapiro_W": 0.9318,
+    "shapiro_p": 0.2603
+   },
+   "test": {
+    "diff_mean": -8.7768,
+    "ratio": 1.0052,
+    "welch_t": -0.3272,
+    "welch_df": 19.3845,
+    "welch_p": 0.7471,
+    "mw_U": 88.0,
+    "mw_p": 0.3286,
+    "hedges_g": -0.121,
+    "g_ci_low": -0.8389,
+    "g_ci_high": 0.5969
+   }
+  }
+ },
+ "by_day": {
+  "Full create": {
+   "day1": {
+    "n": 10,
+    "mean": 491.1,
+    "sd": 21.2156,
+    "median": 487.5,
+    "min": 472.0,
+    "max": 532.0,
+    "ci_low": 475.9233,
+    "ci_high": 506.2767,
+    "cv_pct": 4.32,
+    "skew": 1.1817,
+    "kurtosis": 0.3834,
+    "shapiro_W": 0.8302,
+    "shapiro_p": 0.0337
+   },
+   "day2": {
+    "n": 20,
+    "mean": 504.15,
+    "sd": 20.069,
+    "median": 506.5,
+    "min": 471.0,
+    "max": 541.0,
+    "ci_low": 494.7574,
+    "ci_high": 513.5426,
+    "cv_pct": 3.9808,
+    "skew": -0.0171,
+    "kurtosis": -0.8307,
+    "shapiro_W": 0.9728,
+    "shapiro_p": 0.8123
+   },
+   "test": {
+    "diff_mean": -13.05,
+    "ratio": 1.0266,
+    "welch_t": -1.6168,
+    "welch_df": 17.2221,
+    "welch_p": 0.1241,
+    "mw_U": 63.0,
+    "mw_p": 0.1083,
+    "hedges_g": -0.6211,
+    "g_ci_low": -1.3963,
+    "g_ci_high": 0.1541
+   }
+  },
+  "Total cycle": {
+   "day1": {
+    "n": 10,
+    "mean": 1698.4,
+    "sd": 99.2765,
+    "median": 1675.5,
+    "min": 1600.0,
+    "max": 1961.0,
+    "ci_low": 1627.3819,
+    "ci_high": 1769.4181,
+    "cv_pct": 5.8453,
+    "skew": 2.3589,
+    "kurtosis": 6.6365,
+    "shapiro_W": 0.7276,
+    "shapiro_p": 0.0019
+   },
+   "day2": {
+    "n": 20,
+    "mean": 1711.25,
+    "sd": 51.4259,
+    "median": 1713.5,
+    "min": 1628.0,
+    "max": 1781.0,
+    "ci_low": 1687.182,
+    "ci_high": 1735.318,
+    "cv_pct": 3.0052,
+    "skew": -0.2267,
+    "kurtosis": -1.4409,
+    "shapiro_W": 0.9139,
+    "shapiro_p": 0.0757
+   },
+   "test": {
+    "diff_mean": -12.85,
+    "ratio": 1.0076,
+    "welch_t": -0.3843,
+    "welch_df": 11.4791,
+    "welch_p": 0.7077,
+    "mw_U": 70.0,
+    "mw_p": 0.1943,
+    "hedges_g": -0.1775,
+    "g_ci_low": -0.9379,
+    "g_ci_high": 0.583
+   }
+  }
+ },
+ "trend": {
+  "Full create": {
+   "rho": 0.2532,
+   "p": 0.177
+  },
+  "Full destroy": {
+   "rho": 0.0051,
+   "p": 0.9786
+  },
+  "Total cycle": {
+   "rho": 0.0963,
+   "p": 0.6126
+  },
+  "Destroy deployments": {
+   "rho": -0.0018,
+   "p": 0.9926
+  },
+  "Wait until healthy": {
+   "rho": 0.1461,
+   "p": 0.4411
+  }
+ },
+ "hour": {
+  "Full create": {
+   "rho": -0.2447,
+   "p": 0.1924
+  },
+  "Total cycle": {
+   "rho": -0.2948,
+   "p": 0.1138
+  }
+ },
+ "outliers": {
+  "Destroy deployments": [
+   1
+  ],
+  "Destroy infrastructures": [],
+  "Destroy remote-state": [],
+  "Create remote-state": [
+   1,
+   19
+  ],
+  "Create infrastructures": [
+   21
+  ],
+  "Create deployments": [],
+  "Wait until healthy": [
+   6
+  ],
+  "Full create": [],
+  "Full destroy": [
+   1
+  ],
+  "Total cycle": [
+   1
+  ]
+ },
+ "first10": {
+  "Full create": {
+   "n": 10,
+   "mean": 491.1,
+   "sd": 21.2156,
+   "median": 487.5,
+   "min": 472.0,
+   "max": 532.0,
+   "ci_low": 475.9233,
+   "ci_high": 506.2767,
+   "cv_pct": 4.32,
+   "skew": 1.1817,
+   "kurtosis": 0.3834,
+   "shapiro_W": 0.8302,
+   "shapiro_p": 0.0337
+  },
+  "Full destroy": {
+   "n": 10,
+   "mean": 1207.2,
+   "sd": 83.4237,
+   "median": 1191.0,
+   "min": 1123.0,
+   "max": 1429.0,
+   "ci_low": 1147.5223,
+   "ci_high": 1266.8777,
+   "cv_pct": 6.9105,
+   "skew": 2.4114,
+   "kurtosis": 6.8474,
+   "shapiro_W": 0.716,
+   "shapiro_p": 0.0014
+  },
+  "Total cycle": {
+   "n": 10,
+   "mean": 1698.4,
+   "sd": 99.2765,
+   "median": 1675.5,
+   "min": 1600.0,
+   "max": 1961.0,
+   "ci_low": 1627.3819,
+   "ci_high": 1769.4181,
+   "cv_pct": 5.8453,
+   "skew": 2.3589,
+   "kurtosis": 6.6365,
+   "shapiro_W": 0.7276,
+   "shapiro_p": 0.0019
+  }
+ },
+ "full_create_wo_run1": {
+  "n": 29,
+  "mean": 498.6897,
+  "sd": 20.4993,
+  "median": 495.0,
+  "min": 471.0,
+  "max": 541.0,
+  "ci_low": 490.8921,
+  "ci_high": 506.4872,
+  "cv_pct": 4.1106,
+  "skew": 0.3292,
+  "kurtosis": -0.9601,
+  "shapiro_W": 0.9457,
+  "shapiro_p": 0.1415
+ },
+ "cost_hours": 14.2247,
+ "record": {
+  "commits": 78,
+  "bot": 30,
+  "human": 48,
+  "dec": 20,
+  "oct": 58,
+  "oct14": 32,
+  "oct15": 26,
+  "trigger_only": 15,
+  "skip_ci": 35,
+  "run_reports": 31,
+  "first": "2025-12-05",
+  "last": "2026-10-15"
+ },
+ "sim_params": {
+  "seed": 20261015,
+  "resources": 140,
+  "console_median_s": 35.0,
+  "console_sigma": 0.45,
+  "rework_prob": 0.02,
+  "wait_mean_s": 480.0,
+  "wait_sd_s": 60.0,
+  "learning_first": 1.15,
+  "learning_rate": 0.25,
+  "attr_error_prob": 0.005,
+  "runs": 10
+ },
+ "sim_manual": {
+  "n": 10,
+  "mean": 6317.7,
+  "sd": 282.0548,
+  "median": 6312.5,
+  "min": 5971.0,
+  "max": 6805.0,
+  "ci_low": 6115.9302,
+  "ci_high": 6519.4698,
+  "cv_pct": 4.4645,
+  "skew": 0.3718,
+  "kurtosis": -1.0984,
+  "shapiro_W": 0.9339,
+  "shapiro_p": 0.487
+ },
+ "sim_manual_runs": [
+  {
+   "run": 1,
+   "hands_on_s": 6093,
+   "wait_s": 524,
+   "full_create_s": 6617,
+   "reworked_resources": 8,
+   "rebuild_attr_errors": 0,
+   "rebuild_success": 1
+  },
+  {
+   "run": 2,
+   "hands_on_s": 6367,
+   "wait_s": 438,
+   "full_create_s": 6805,
+   "reworked_resources": 2,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 3,
+   "hands_on_s": 5927,
+   "wait_s": 471,
+   "full_create_s": 6398,
+   "reworked_resources": 4,
+   "rebuild_attr_errors": 0,
+   "rebuild_success": 1
+  },
+  {
+   "run": 4,
+   "hands_on_s": 6038,
+   "wait_s": 474,
+   "full_create_s": 6512,
+   "reworked_resources": 2,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 5,
+   "hands_on_s": 5983,
+   "wait_s": 476,
+   "full_create_s": 6459,
+   "reworked_resources": 2,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 6,
+   "hands_on_s": 5545,
+   "wait_s": 524,
+   "full_create_s": 6070,
+   "reworked_resources": 1,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 7,
+   "hands_on_s": 5621,
+   "wait_s": 414,
+   "full_create_s": 6035,
+   "reworked_resources": 3,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 8,
+   "hands_on_s": 5551,
+   "wait_s": 420,
+   "full_create_s": 5971,
+   "reworked_resources": 2,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 9,
+   "hands_on_s": 5648,
+   "wait_s": 436,
+   "full_create_s": 6083,
+   "reworked_resources": 4,
+   "rebuild_attr_errors": 1,
+   "rebuild_success": 0
+  },
+  {
+   "run": 10,
+   "hands_on_s": 5653,
+   "wait_s": 574,
+   "full_create_s": 6227,
+   "reworked_resources": 4,
+   "rebuild_attr_errors": 0,
+   "rebuild_success": 1
+  }
+ ],
+ "sim_learning_rho": -0.7576,
+ "sim_learning_p": 0.0111,
+ "h1": {
+  "diff_mean": -5817.9,
+  "ratio": 12.6405,
+  "welch_t": -65.1674,
+  "welch_df": 9.0334,
+  "welch_p": 0.0,
+  "mw_U": 0.0,
+  "mw_p": 0.0,
+  "hedges_g": -41.1745,
+  "g_ci_low": -50.2257,
+  "g_ci_high": -32.1234
+ },
+ "man_rebuild_success": {
+  "k": 3,
+  "n": 10,
+  "p": 0.3,
+  "low": 0.1078,
+  "high": 0.6032
+ },
+ "h3_fisher_p": 0.0,
+ "h1_first10": {
+  "diff_mean": -5826.6,
+  "ratio": 12.8644,
+  "welch_t": -65.1413,
+  "welch_df": 9.1018,
+  "welch_p": 0.0,
+  "mw_U": 0.0,
+  "mw_p": 0.0002,
+  "hedges_g": -27.9012,
+  "g_ci_low": -36.5921,
+  "g_ci_high": -19.2102
+ },
+ "h3_p_success_model": 0.4957,
+ "h3_sensitivity": {
+  "0.002": 0.7556,
+  "0.005": 0.4957,
+  "0.01": 0.2449
+ },
+ "h1_sensitivity": {
+  "20": 54.6667,
+  "35": 89.6667,
+  "60": 148.0,
+  "120": 288.0
+ },
+ "coverage": {
+  "counts": {
+   "full": 19,
+   "none": 3,
+   "partial": 2
+  },
+  "total": 24,
+  "full_pct": 79.1667,
+  "full_or_partial_pct": 87.5
+ },
+ "meta": [
+  {
+   "run_number": 1,
+   "event": "push",
+   "start": "14 Oct 01:13",
+   "order": 1,
+   "day": "14 Oct",
+   "hour": 1.2167
+  },
+  {
+   "run_number": 4,
+   "event": "push",
+   "start": "14 Oct 08:48",
+   "order": 2,
+   "day": "14 Oct",
+   "hour": 8.8
+  },
+  {
+   "run_number": 5,
+   "event": "push",
+   "start": "14 Oct 11:01",
+   "order": 3,
+   "day": "14 Oct",
+   "hour": 11.0167
+  },
+  {
+   "run_number": 6,
+   "event": "push",
+   "start": "14 Oct 13:56",
+   "order": 4,
+   "day": "14 Oct",
+   "hour": 13.9333
+  },
+  {
+   "run_number": 7,
+   "event": "push",
+   "start": "14 Oct 16:20",
+   "order": 5,
+   "day": "14 Oct",
+   "hour": 16.3333
+  },
+  {
+   "run_number": 8,
+   "event": "push",
+   "start": "14 Oct 17:40",
+   "order": 6,
+   "day": "14 Oct",
+   "hour": 17.6667
+  },
+  {
+   "run_number": 9,
+   "event": "push",
+   "start": "14 Oct 19:30",
+   "order": 7,
+   "day": "14 Oct",
+   "hour": 19.5
+  },
+  {
+   "run_number": 10,
+   "event": "push",
+   "start": "14 Oct 20:53",
+   "order": 8,
+   "day": "14 Oct",
+   "hour": 20.8833
+  },
+  {
+   "run_number": 11,
+   "event": "push",
+   "start": "14 Oct 22:12",
+   "order": 9,
+   "day": "14 Oct",
+   "hour": 22.2
+  },
+  {
+   "run_number": 12,
+   "event": "push",
+   "start": "14 Oct 23:36",
+   "order": 10,
+   "day": "14 Oct",
+   "hour": 23.6
+  },
+  {
+   "run_number": 13,
+   "event": "push",
+   "start": "15 Oct 02:14",
+   "order": 11,
+   "day": "15 Oct",
+   "hour": 2.2333
+  },
+  {
+   "run_number": 14,
+   "event": "push",
+   "start": "15 Oct 02:51",
+   "order": 12,
+   "day": "15 Oct",
+   "hour": 2.85
+  },
+  {
+   "run_number": 15,
+   "event": "push",
+   "start": "15 Oct 03:36",
+   "order": 13,
+   "day": "15 Oct",
+   "hour": 3.6
+  },
+  {
+   "run_number": 16,
+   "event": "push",
+   "start": "15 Oct 08:10",
+   "order": 14,
+   "day": "15 Oct",
+   "hour": 8.1667
+  },
+  {
+   "run_number": 17,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 09:38",
+   "order": 15,
+   "day": "15 Oct",
+   "hour": 9.6333
+  },
+  {
+   "run_number": 18,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 10:07",
+   "order": 16,
+   "day": "15 Oct",
+   "hour": 10.1167
+  },
+  {
+   "run_number": 19,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 10:38",
+   "order": 17,
+   "day": "15 Oct",
+   "hour": 10.6333
+  },
+  {
+   "run_number": 20,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 11:07",
+   "order": 18,
+   "day": "15 Oct",
+   "hour": 11.1167
+  },
+  {
+   "run_number": 21,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 11:37",
+   "order": 19,
+   "day": "15 Oct",
+   "hour": 11.6167
+  },
+  {
+   "run_number": 22,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 12:06",
+   "order": 20,
+   "day": "15 Oct",
+   "hour": 12.1
+  },
+  {
+   "run_number": 23,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 12:34",
+   "order": 21,
+   "day": "15 Oct",
+   "hour": 12.5667
+  },
+  {
+   "run_number": 24,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 13:01",
+   "order": 22,
+   "day": "15 Oct",
+   "hour": 13.0167
+  },
+  {
+   "run_number": 25,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 13:31",
+   "order": 23,
+   "day": "15 Oct",
+   "hour": 13.5167
+  },
+  {
+   "run_number": 26,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 13:59",
+   "order": 24,
+   "day": "15 Oct",
+   "hour": 13.9833
+  },
+  {
+   "run_number": 27,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 14:28",
+   "order": 25,
+   "day": "15 Oct",
+   "hour": 14.4667
+  },
+  {
+   "run_number": 28,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 14:57",
+   "order": 26,
+   "day": "15 Oct",
+   "hour": 14.95
+  },
+  {
+   "run_number": 29,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 15:25",
+   "order": 27,
+   "day": "15 Oct",
+   "hour": 15.4167
+  },
+  {
+   "run_number": 30,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 15:54",
+   "order": 28,
+   "day": "15 Oct",
+   "hour": 15.9
+  },
+  {
+   "run_number": 31,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 16:24",
+   "order": 29,
+   "day": "15 Oct",
+   "hour": 16.4
+  },
+  {
+   "run_number": 32,
+   "event": "workflow_dispatch",
+   "start": "15 Oct 16:53",
+   "order": 30,
+   "day": "15 Oct",
+   "hour": 16.8833
+  }
+ ]
+}
