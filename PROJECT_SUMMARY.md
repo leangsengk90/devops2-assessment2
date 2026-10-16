@@ -1,4 +1,4 @@
-# Project Summary: DevOps2 Assessment 2
+# Project Summary: ITSM Assessment 2
 
 This is a comprehensive Terraform-based project designed to deploy a scalable, containerized microservices architecture on AWS. It's structured for a DevOps assessment, focusing on infrastructure as code (IaC), remote state management, and modular deployments.
 
