@@ -216,15 +216,15 @@ const NT = R.n_tf, C = R.campaign, REC = R.record, PC = R.gh_phases["Full create
   card(s, 0.45, 1.15, 2.2, 1.28, `${m(pc.mean)} min`, "to build from empty", `SD ${pc.sd.toFixed(0)} s · CV ${pc.cv_pct.toFixed(1)}% · n = ${NT}`, "f1");
   card(s, 0.45, 2.53, 2.2, 1.28, `${m(pd.mean)} min`, "to destroy", `service stacks = ${R.destroy_deploy_share_pct.toFixed(1)}% of cycle`, "f2");
   card(s, 0.45, 3.91, 2.2, 1.28, `${NT} / ${NT}`, "rebuilds succeeded", `${R.http_200} / ${R.n_http} HTTP 200`, "f3");
-  const phases = ["Destroy deployments", "Destroy infrastructures", "Destroy remote-state", "Create remote-state", "Create infrastructures", "Create deployments", "Wait until healthy"];
-  s.addChart(pres.charts.BAR, [
-    { name: `GitHub Actions (n = ${NT})`, labels: phases, values: phases.map((p) => +(R.gh_phases[p].mean / 60).toFixed(1)) },
-  ], { x: 2.9, y: 1.1, w: 6.65, h: 4.05, barDir: "bar", barGrouping: "clustered", chartColors: ["2A78D6"],
-       showTitle: true, title: `Mean minutes per phase (${NT} measured rebuilds)`, titleFontSize: 12, titleFontFace: "+mn-lt", titleColor: INK,
-       showValue: true, dataLabelPosition: "outEnd", dataLabelFormatCode: "0.0", dataLabelFontSize: 8, dataLabelColor: MUTED, dataLabelFontFace: "+mn-lt",
-       catAxisOrientation: "maxMin", catAxisLabelFontSize: 9, catAxisLabelColor: MUTED, catAxisLabelFontFace: "+mn-lt",
-       valAxisLabelFontSize: 8, valAxisLabelColor: MUTED, valAxisLabelFontFace: "+mn-lt", valGridLine: { color: "E4E3DF", size: 0.5 },
-       catGridLine: { style: "none" }, showLegend: false, barGapWidthPct: 40, objectName: "phase-chart" });
+  s.addImage({ path: path.join(FIG, "slide_phases.png"), x: 2.85, y: 1.12, w: 6.7, h: 2.42, objectName: "phase-chart" });
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 2.85, y: 3.7, w: 6.7, h: 1.49, fill: { color: CARD }, line: { color: CARD }, rectRadius: 0.08, objectName: "read-card" });
+  T(s, "HOW TO READ IT", { x: 3.05, y: 3.8, w: 3, h: 0.22, fontSize: 9.5, bold: true, color: ORANGE });
+  T(s, [
+    `Removing takes longer than building: ${m(pd.mean)} min vs ${m(pc.mean)} min. The five service stacks alone take ${m(R.gh_phases["Destroy deployments"].mean)} min.`,
+    `The stacks are destroyed one after another, about ${(R.destroy_deploy_per_service_s / 60).toFixed(1)} min each, so this one step sets the cycle length.`,
+    `Short whiskers = consistent runs: each phase varies by seconds, not minutes (build SD ${pc.sd.toFixed(0)} s).`,
+  ].map((t, i, a) => ({ text: t, options: { bullet: true, breakLine: i < a.length - 1 } })),
+    { x: 3.05, y: 4.06, w: 6.35, h: 1.08, fontSize: 10.5, color: INK, valign: "top", paraSpaceAfter: 2, objectName: "read-body" });
   s.addNotes(`All values on this slide are measured from the GitHub Actions pipeline over ${NT} rebuilds. Building from empty took ${m(pc.mean)} minutes (95% CI ${m(pc.ci_low)}–${m(pc.ci_high)}); destroying took ${m(pd.mean)} minutes; a whole cycle about ${m(R.gh_phases["Total cycle"].mean)} minutes. Destruction, not creation, dominates: the five service stacks are destroyed one after another, about ${(R.destroy_deploy_per_service_s / 60).toFixed(1)} minutes each. Services reached steady state in ${R.health.mean.toFixed(0)} s on average; one finance start-up in run 14 has no steady-state timestamp but answered HTTP 200.`);
 }
 
@@ -260,11 +260,7 @@ const NT = R.n_tf, C = R.campaign, REC = R.record, PC = R.gh_phases["Full create
 {
   const s = content(11, "Findings 3: Terraform vs Manual Console");
   const tf = +(R.gh_phases["Full create"].mean / 60).toFixed(1), man = +(R.sim_manual.mean / 60).toFixed(1);
-  s.addChart(pres.charts.BAR, [{ name: "Minutes to build from empty", labels: ["Terraform via GitHub Actions (measured)", "Manual AWS console (SIMULATED)"], values: [tf, man] }],
-    { x: 0.45, y: 1.1, w: 4.3, h: 2.9, barDir: "col", chartColors: ["2A78D6", "EB6834"], showTitle: true, title: "Minutes to build from empty", titleFontSize: 12, titleFontFace: "+mn-lt", titleColor: INK,
-      showValue: true, dataLabelPosition: "outEnd", dataLabelFormatCode: "0.0", dataLabelFontSize: 11, dataLabelColor: INK, dataLabelFontFace: "+mn-lt",
-      catAxisLabelFontSize: 9, catAxisLabelColor: MUTED, catAxisLabelFontFace: "+mn-lt", valAxisLabelFontSize: 8, valAxisLabelColor: MUTED, valAxisLabelFontFace: "+mn-lt",
-      valGridLine: { color: "E4E3DF", size: 0.5 }, catGridLine: { style: "none" }, showLegend: false, barGapWidthPct: 60, objectName: "h1-chart" });
+  s.addImage({ path: path.join(FIG, "slide_h1.png"), x: 0.6, y: 1.05, w: 3.9, h: 2.97, objectName: "h1-chart" });
   T(s, `${R.h1.ratio.toFixed(1)}× faster · Welch t(${R.h1.welch_df.toFixed(1)}) = ${R.h1.welch_t.toFixed(1)}, p < .001 · rebuilds identical ${NT}/${NT} vs ${R.man_rebuild_success.k}/10 (Fisher p ${R.h3_fisher_p < .001 ? "< .001" : "= " + R.h3_fisher_p.toFixed(3).replace(/^0/, "")})`,
     { x: 0.45, y: 4.1, w: 4.3, h: 0.5, fontSize: 10.5, color: INK, valign: "top" });
   T(s, "Manual values are SIMULATED from a stated, seeded model; results hold from 20 s to 120 s per resource.", { x: 0.45, y: 4.6, w: 4.3, h: 0.45, fontSize: 10, italic: true, color: MUTED, valign: "top" });

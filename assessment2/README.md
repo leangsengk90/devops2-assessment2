@@ -32,6 +32,7 @@
 ```
 python analysis/analyze.py   # needs pandas, scipy, matplotlib
 python build/figs.py
+python build/slide_figs.py   # chart images for slides 9 and 11
 python build/build.py        # needs python-docx
 node build/deck.js           # needs pptxgenjs
 ```
